@@ -1,0 +1,128 @@
+\section{Running jobs}
+\frame{
+\frametitle{How to run programs}
+\begin{itemize}
+  \item After login we are on a \textit{login node} used only for:
+  \begin{itemize}
+    \item submitting jobs,
+    \item editing files,
+    \item compiling small programs,
+    \item other computationally light tasks.
+  \end{itemize}
+  \item \alert{Never run calculations interactively on the login node}
+  \item We want balanced load of the resources
+  \item Fair share according to time allocations
+  \item Only persons/groups belonging to a time allocation can run \\~
+  \item We use a queuing/batch system
+
+  \end{itemize}
+ }
+
+
+\subsection{SLURM}
+\frame{
+\frametitle{SLURM queueing system}
+\framesubtitle{Simple Linux Utility for Resource Management}
+
+\begin{itemize}
+ \item Open source, fault-tolerant, and highly scalable cluster management and job scheduling system
+ \begin{itemize}
+  \item \alert{Allocates} exclusive and/or non-exclusive access to \alert{resources} for some duration of time
+  \item Provides a framework for \alert{starting}, \alert{executing}, and \alert{monitoring} work on the set of allocated nodes
+  \item \alert{Arbitrates contention} for resources by managing a queue 
+ \end{itemize}
+ \item Job Prority computed based on 
+ \begin{description}
+    \item [Age] the length of time a job has been waiting
+    \item [Fair-share] the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed
+    \item [Job size] the number of nodes or CPUs a job is allocated
+    \item [Partition] a factor associated with each node partition
+    \item [QOS] a factor associated with each Quality Of Service
+ \end{description}
+\end{itemize}
+}
+
+\subsection*{SLURM commands}
+
+\begin{frame}[fragile]
+\frametitle{Interactive session \hfill \alert{\textbf{salloc}}}
+
+\begin{exampleblock}{Request for an interactive allocation or resources}
+  \begin{verbatim}
+  $ salloc -A <account> -t <d-hh:mm:ss> -N <nodes>
+  salloc: Granted job allocation 123456
+   \end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{Run application on \alert{\textbf{Beskow}}}
+  \begin{verbatim}
+  $ aprun -n <PEs> -d <depth> ./binary.x
+#PEs 	- number of processing elements
+#depth 	- number of threads (depth) per PE
+  \end{verbatim}
+\end{exampleblock}
+  
+  
+\begin{exampleblock}{Run application on \alert{\textbf{Tegner}}}
+
+  \begin{verbatim}
+  $ mpirun -np <cores> ./binary.x
+  \end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Launch jobs in the backgound \hfill  \alert{\textbf{sbatch}}}
+\begin{exampleblock}{Submit the job to SLURM queue}
+  \begin{verbatim}
+$ sbatch <script>
+Submitted batch job 958287
+  \end{verbatim}
+\end{exampleblock}
+
+\scriptsize
+The script should contain all necessary data to identify the account and requested resources 
+\begin{exampleblock}{Example of request to run myexe for 1 hour on 4 nodes}
+  \begin{verbatim}
+# set !/bin/bash -l
+
+#SBATCH -A 201X-X-XX
+#SBATCH -J myjob
+#SBATCH -t 1:00:00
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=32
+#SBATCH -e error_file.e
+#SBATCH -o output_file.o
+
+aprun -n 128 ./myexe > my_output_file 2>&1
+  \end{verbatim}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Monintoring and/or canceling running jobs }
+\begin{alertblock}{\textbf{squeue} -u  \$USER}
+  Displays all queue and/or running jobs that belong to the user
+\tiny
+  \begin{verbatim}
+cira@beskow-login2:~> squeue -u cira
+ JOBID     USER ACCOUNT           NAME  ST REASON    START_TIME                TIME  TIME_LEFT NODES  CPUS
+957519   cira pdc.staff      VASP-test   R None      2016-08-15T08:15:24    6:09:42   17:49:18    16  1024
+957757   cira pdc.staff      VASP-run    R None      2016-08-15T11:14:20    3:10:46   20:48:14    128 8192
+  \end{verbatim}
+\end{alertblock}
+
+\begin{alertblock}{\textbf{scancel} [job]}
+Stops a runing job or removes a pending one from the queue
+\tiny
+  \begin{verbatim}
+cira@beskow-login2:~> scancel 957519
+salloc: Job allocation 957891 has been revoked.
+
+cira@beskow-login2:~> squeue -u cira
+JOBID     USER ACCOUNT           NAME  ST REASON    START_TIME                TIME  TIME_LEFT NODES  CPUS
+957757   cira pdc.staff      VASP-run    R None      2016-08-15T11:14:20    3:10:46   20:48:14    128 8192
+  \end{verbatim}
+\end{alertblock}
+\end{frame}

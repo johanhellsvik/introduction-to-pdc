@@ -1,0 +1,149 @@
+\section*{Unix shell}
+\begin{frame}[fragile]
+  \frametitle{Introducing the unix shell}
+  \begin{alertblock}{login into Beskow}
+    \begin{verbatim}
+$ ssh beskow.pdc.kth.se
+Last login: Fri Feb 13 20:20:06 2016 from example.com
+bast@beskow-login2:~$ _
+    \end{verbatim}
+  \end{alertblock}
+
+  \begin{itemize}
+  \item Command Line Interface often more efficient than GUI
+  \item High action-to-keystroke ratio
+  \item Creativity through pipelines
+  \item System is configured with text files
+  \item Calculations are configured and run using text files
+  \item Good for working over network
+  \item Good for reproducibility
+  \item Good for unsupervised work-flows
+  \end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Bash: Files and directories}
+  \begin{exampleblock}{\alert{\textbf{pwd}} command returns current directory}
+    \begin{verbatim}
+user@machine:~$ pwd
+/afs/pdc.kth.se/home/u/user
+    \end{verbatim}
+  \end{exampleblock}
+
+   \begin{exampleblock}{Change the directory with \alert{\textbf{cd}}}
+    \begin{verbatim}
+user@machine:~$ cd tmp/talks/
+user@machine:~/tmp/talks$ pwd
+/afs/pdc.kth.se/home/u/user/tmp/talks
+    \end{verbatim}
+  \end{exampleblock}
+  
+    \begin{exampleblock}{List the contents with \alert{\textbf{ls -l}}}
+    \begin{verbatim}
+user@machine:~/tmp/talks$ ls -l
+total 237
+drwx------ 3 user csc-users   2048 Aug 17 15:21 img
+-rw------- 1 user csc-users  18084 Aug 17 15:21 pdc-env.html
+    \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Bash: Creating and editing files and directories}
+  \begin{exampleblock}{Command \alert{\textbf{mkdir}} creates a new directory}
+    \begin{verbatim}
+$ mkdir results
+$ cd 	results
+    \end{verbatim}
+  \end{exampleblock}
+
+   \begin{exampleblock}{File editors}
+    \begin{verbatim}
+$ nano 	draft.txt
+$ emacs draft.txt
+$ vi    draft.txt
+$ vim   draft.txt # this is Vi "improved"
+    \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Bash: Copying, moving, renaming, and deleting}
+\begin{columns}[t]
+\column{.45\textwidth}
+  \begin{exampleblock}{~}
+    \begin{verbatim}
+$ cp draft.txt backup.txt
+$ cp -r results backup
+$ mv draft.txt draft_2.txt
+$ mv results backup
+$ mv results ..
+$ rm draft.txt
+$ rm -r results
+    \end{verbatim}
+  \end{exampleblock}
+
+  \column{.5\textwidth}
+  \begin{exampleblock}{~}
+    \begin{verbatim}
+# copy file
+# recursively copy directory
+# move/rename file
+# move/rename directory
+# move directory one level up
+# remove file
+# remove directory and contents
+    \end{verbatim}
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Bash: Finding things}
+  \begin{exampleblock}{Extract lines which contain an expression with \alert{\textbf{grep}}}
+    \begin{verbatim}
+$ grep fixme draft.txt
+$ man grep
+$ grep energy results.out | sort | uniq
+    \end{verbatim}
+  \end{exampleblock}
+
+   \begin{exampleblock}{Redirecting output}
+    \begin{verbatim}
+$ grep energy results.out | sort | uniq > energies.txt  
+$ grep dipole results.out | sort | uniq >> energies.txt
+$ cat results2.txt
+$ cat results2.txt >> results_all.txt
+    \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Bash: Writing shell scripts}
+  \begin{exampleblock}{Edit script in preferred editor}
+    \begin{verbatim}
+#!/usr/bin/env bash
+# here we loop over all files that end with *.out
+for file in *.out; do
+    echo $file
+    grep energy $file
+done
+    \end{verbatim}
+  \end{exampleblock}
+
+   \begin{exampleblock}{Change permissions \alert{\textbf{chmod}} to make the script executable}
+    \begin{verbatim}
+# make it executable
+$ chmod u+x my_script
+# run it
+$ ./my_script
+    \end{verbatim}
+  \end{exampleblock}
+\end{frame}

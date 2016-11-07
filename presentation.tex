@@ -1,0 +1,161 @@
+\documentclass[xcolor=table]{beamer}
+%\documentclass[handouts]{beamer}
+%\setbeameroption{show notes}
+\setbeameroption{hide notes}
+%\setbeameroption{show only notes}
+
+
+%[xetex,mathserif,serif]
+\usepackage{multicol}
+%\usepackage{animate}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\graphicspath{{images/}}
+
+%KTH official colors https://intra.kth.se/polopoly_fs/1.486828!/image/fargreferens_png.png
+\definecolor{kthBlue}{RGB}{25,84,166} %Bla
+\definecolor{kthLightBlue}{RGB}{36,160,216} %Ljusbla
+
+\definecolor{kthRed}{RGB}{157,16,45} %Rod
+\definecolor{kthLigthRed}{RGB}{228,54,62} %Lujsrod
+
+\definecolor{kthGrey}{RGB}{101,101,108} %Morkgra
+\definecolor{kthLightGrey}{RGB}{227,229,227} %Ljusgra
+\definecolor{kthMediumGrey}{RGB}{189,188,188} %Mellangra
+
+\definecolor{kthGreen}{RGB}{98,146,46} %Gorn
+\definecolor{kthLightGreen}{RGB}{176,201,43} %Ljusgron
+
+
+\usetheme{AnnArbor}
+
+% \setbeamercolor{background canvas}{bg=white}
+\setbeamercolor*{structure}{fg=kthLightBlue,bg=kthBlue}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=kthBlue} 
+\setbeamercolor*{palette secondary}{use=structure,fg=black,bg=kthLightGrey}
+\setbeamercolor*{palette tertiary}{use=structure,fg=black,bg=kthLightBlue}
+%\setbeamercolor*{palette quaternary}{use=structure,fg=black,bg=kthLightGrey}
+
+
+\setbeamercolor*{frametitle}{fg=kthBlue,bg=kthLightGrey}
+\setbeamercolor*{alerted text}{fg=kthRed}
+\setbeamercolor*{item projected}{fg=white,bg=kthLightBlue}
+%\setbeamercolor{palette sidebar primary}{use=structure,fg=structure.fg,bg=red}
+%\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg,bg=green}
+%\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+
+
+\setbeamercolor{block title}{bg=kthMediumGrey}
+\setbeamercolor{block body}{bg=normal text.bg!90!black}
+
+\setbeamercolor{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!75!black}
+\setbeamercolor{block body alerted}{bg=normal text.bg!90!black}
+
+\setbeamercolor{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!black}
+\setbeamercolor{block body example}{bg=normal text.bg!90!black}
+
+%\setbeamercolor{fine separation line}{}
+%\setbeamercolor{normal text}{bg=white,fg=black}
+%\setbeamercolor{section in sidebar}{fg=red}
+%\setbeamercolor{section in sidebar shaded}{fg=grey}
+%\setbeamercolor{separation line}{}
+%\setbeamercolor{structure}{bg=black, fg=kthGreen}
+%\setbeamercolor{subsection in sidebar}{fg=brown}
+%\setbeamercolor{subsection in sidebar shaded}{fg=grey}
+\setbeamercolor{title}{fg=white,bg=kthBlue}
+%\setbeamercolor{titlelike}{fg=DarkGreen}
+
+
+%\setbeamercolor{sidebar}{bg=red}
+%\setbeamercolor{sidebar}{parent=palette primary}
+%\setbeamercolor{palette sidebar primary}{fg=red}%use=normal text,fg=normal text.fg}
+%\setbeamercolor{palette sidebar quaternary}{fg=red}
+%\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg}
+%\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+
+
+
+\title{Introduction to PDC environement}
+\subtitle{}
+
+\author{Cristian Cira}
+
+\institute[PDC]{
+  PDC Center for High Performance Computing\\
+  KTH Royal Institute of Technology
+  }
+  \logo{
+   \includegraphics[width=1cm,keepaspectratio]{logo_kth_transparent}~%
+   % \includegraphics[width=1cm,height=1cm,keepaspectratio]{logo_kth+pdc_blue}~%
+ 
+}
+\date[PDC Oct 2016]{PDC October 2016}
+\subject{Introduction}
+
+
+\begin{document}
+\frame{\titlepage}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%\AtBeginSubsection[]
+%{
+ % \begin{frame}
+  %  \frametitle{Table of Contents}
+   % \tableofcontents[currentsection,currentsubsection]
+ % \end{frame}
+%}
+
+%\frame[plain]{
+%Large image inclusion 
+%\color{kthBlue}{kthBlue}\\
+%\color{kthLightBlue}{kthLightBlue}\\
+%\color{kthRed}{kthRed}\\
+%\color{kthLigthRed}{kthLigthRed}\\
+%\color{kthGrey}{kthGrey}\\
+%\color{kthLightGrey}{kthLightGrey}\\
+%\color{kthGreen}{kthGreen}\\
+%\color{kthLightGreen}{kthLightGreen}\\
+%\color{kthMediumGrey}{kthMediumGrey}
+%}
+%\frame[shrink]{
+%%\begin{block}{Answered Questions}
+%How many primes are there?
+%\end{block}
+%\begin{block}{Open Questions}
+%Is every even number the sum of two primes?
+%\end{block}
+%}
+%\frame[allowframebreaks]{
+%The allowframebreaks option will auto-create new frames if there is too much content to be displayed on one.
+%}
+
+
+
+\newcommand\irregularcircle[2]{% radius, irregularity
+  \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+  +(0:\len pt)
+  \foreach \a in {10,20,...,350}{
+    \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+    -- +(\a:\len pt)
+  } -- cycle
+}
+
+\include{intro}
+\include{infrastructure}
+\include{accounts}
+\include{development}
+\include{jobs}
+\include{conclusion}
+\include{unix_shell}
+
+\end{document}
+
+

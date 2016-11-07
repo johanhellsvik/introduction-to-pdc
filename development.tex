@@ -1,0 +1,153 @@
+\section{Development}
+\subsection{Building}
+\begin{frame}[fragile]
+\frametitle{Compiling, Linking and Running Applications}
+\framesubtitle{on HPC clusters}
+ \begin{description}
+    \item [source code] C / C++ / Fortran ( \verb|.c, .cpp, .f90, .h|  )
+    \item [compiled] Cray/Intel/GNU compilers\\ include headers, expand macros (\verb|.i,.ii| )
+    \item [assembled] into machine code (\verb|.o, .obj| )
+    \item [linked] Static Libraries (\verb|.lib, .a|  ) \\ Shared Library (\verb|.dll, .so| )
+    \item ~ 
+    \item [request allocation] submit job request to SLURM queuing system \\ \verb|salloc/sbatch|
+    \item [run] application on scheduled resources \\ \verb|aprun/mpirun|
+ \end{description}
+\end{frame}
+
+\subsection{Compiliers}
+\begin{frame}[fragile]
+\frametitle{Compiling serial and/or parallel code}
+\framesubtitle{specific to \alert{Tegner}}
+
+\begin{columns}[t]
+\column{.45\textwidth}
+\begin{exampleblock}{GNU Compiler Collection (\textbf{gcc})}
+  \scriptsize
+  \begin{verbatim}
+$ module load 	gcc openmpi
+$ gcc	   -fopenmp source.c
+$ g++	   -fopenmp source.cpp
+$ gfortran -fopenmp source.F90
+$ mpicc	   -fopenmp source.c
+$ mpicxx   -fopenmp source.cpp
+$ mpif90   -fopenmp source.F90
+  \end{verbatim}
+  \end{exampleblock}
+
+  \begin{exampleblock}{Portland Group Compilers (\textbf{pgi}) }
+  \scriptsize
+  \begin{verbatim}
+$ module load 	pgi
+$ pgcc  -mp source.c
+$ pgcpp -mp source.cpp
+$ pgf90 -mp source.F90
+  \end{verbatim}
+  \end{exampleblock}
+
+\column{.45\textwidth}
+
+  \begin{exampleblock}{Intel compilers (\textbf{i-compilers})}
+  \scriptsize
+  \begin{verbatim}
+  $ module load i-compilers
+  $ icc   -openmp source.c	
+  $ icpc  -openmp source.cpp
+  $ ifort -openmp source.F90
+
+  $ module add i-compilers intelmpi
+  $ mpiicc 	-openmp source.c
+  $ mpiicpcp 	-openmp source.cpp
+  $ mpiifort 	-openmp source.F90
+  \end{verbatim}
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\subsection{Modules}
+\begin{frame}[fragile]
+\frametitle{Modules}
+\framesubtitle{The \textit{modules package} allow for dynamic add/remove of installed software packages to the running environment}
+
+\begin{exampleblock}{Loading modules}
+  \begin{verbatim}
+  module load 	<software_name>
+  module add 	<software_name>
+  module use 	<software_name>
+  \end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{Unloading modules}
+  \begin{verbatim}
+  module unload <software_name>
+  \end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Modules }
+\framesubtitle{Displaying modules}
+\begin{exampleblock}{\$ module list}
+\scriptsize
+\begin{verbatim}
+Currently Loaded Modulefiles:
+  1) modules/3.2.6.7
+  ...
+  20) PrgEnv-cray/5.2.56
+\end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{\$ module avail [\textit{software\_name}]}
+\scriptsize
+\begin{verbatim}
+-------------------------- /opt/modulefiles -----------------------------
+gcc/4.8.1     gcc/4.9.1(default)     gcc/4.9.2     gcc/4.9.3    gcc/5.1.0
+\end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{\$ module show \textit{software\_name}}
+\scriptsize
+\begin{verbatim}
+------------------------- /opt/modulefiles/gcc/4.9.1 ---------------------
+conflict	 gcc 
+prepend-path	 PATH /opt/gcc/4.9.1/bin 
+prepend-path	 MANPATH /opt/gcc/4.9.1/snos/share/man 
+prepend-path	 LD_LIBRARY_PATH /opt/gcc/4.9.1/snos/lib64 
+setenv		 GCC_PATH /opt/gcc/4.9.1 
+-------------------------------------------------------------------
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+\subsection{Programming environments}
+\begin{frame}[fragile]
+  \frametitle{Programming Environment Modules}
+  \framesubtitle{specific to \alert{Beskow only}}
+
+\begin{columns}[t]
+\column{.7\textwidth}
+  \begin{description}
+  \item [Cray] \verb|$ module load PrgEnv-cray|
+  \item [Intel] \verb|$ module load PrgEnv-intel|
+  \item [GNU] \verb|$ module load PrgEnv-gnu|
+  \end{description}
+   % \item Module cray-libsci provides BLAS, LAPACK, BLACS, and SCALAPACK
+   % \item Module cray-mpich provides MPI
+\column{.3\textwidth}
+    \begin{verbatim}
+$ cc	source.c
+$ CC	source.cpp
+$ ftn	source.F90
+  \end{verbatim}
+\end{columns}
+  \begin{exampleblock}{Compiler wrappers : \alert{\textbf{cc} \textbf{CC} \textbf{ftn}}}
+    \alert{Advantages}\\
+    Compiler wrappers will automatically 
+    \begin{itemize}
+      \item link to BLAS, LAPACK, BLACS, SCALAPACK, FFTW\\
+      \item use MPI wrappers\\
+    \end{itemize}
+    \alert{Disadvantage}\\
+    Sometimes you need to edit Makefiles which are not designed for Cray 
+\end{exampleblock}
+\end{frame}
