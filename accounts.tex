@@ -9,15 +9,16 @@
 \item [Time allocation] set the access limits
 \end{description}
 
-\begin{alertblock}{Apply for SUPR account}
+\begin{alertblock}{Apply for PDC account via SUPR}
 \begin{itemize}
   \item http://supr.snic.se
   \item SNIC database of persons, projects, project proposals and more
   \item Apply and link SUPR account to PDC
+  \item Valid post address for password
 \end{itemize}
 \end{alertblock}
 
-\begin{alertblock}{Apply for PDC account}
+\begin{alertblock}{Apply for PDC account via PDC}
 \begin{itemize}
   \item http://www.pdc.kth.se/support/accounts/user
   \item Electronic copy of your passport
@@ -35,7 +36,7 @@
 \scriptsize
 \begin{block}{\large{Small allocation}}
 \begin{itemize}
-  \item Applicant can be a PhD student or higher
+  \item Applicant can be a PhD student or more senior
   \item Evaluated on a technical level only
   \item Limits is usually $5K$ corehours each month
 \end{itemize}
@@ -95,11 +96,11 @@ NN at [CENTER-ACRONYME] is acknowledged for assistance concerning technical and 
 \end{exampleblock}
 
 \begin{exampleblock}{\large{Realm}}
-Sets boundaries within which an authentication server has authority \verb|NADA.KTH.SE|
+Sets boundaries within which an authentication server has authority (\verb|NADA.KTH.SE|)
 \end{exampleblock}
 
 \begin{exampleblock}{\large{Principal}}
-Refers to the entries in the authentication server database  \verb|username@NADA.KTH.SE|
+Refers to the entries in the authentication server database  (\verb|username@NADA.KTH.SE|)
 \end{exampleblock}
 
 \end{frame}
@@ -109,7 +110,7 @@ Refers to the entries in the authentication server database  \verb|username@NADA
 \begin{frame}[fragile]
 \frametitle{Kerberos commands}
 \begin{description}
- \item [kinit] proves identity
+ \item [kinit] generates ticket which proves identity
  \item [klist] lists kerberos tickets
  \item [kdestroy] destroys ticket file
  \item [kpasswd] changes password
@@ -142,9 +143,9 @@ $ kinit -f -l 7d username@NADA.KTH.SE
 \begin{block}{Forward your ticket via ssh and login}
 \begin{verbatim}
 $ ssh
-  -o GSSAPIDelegateCredential 
-  -o GSSAPIAuthentication 
-  -o GSSAPIKeyExchange 
+  -o GSSAPIDelegateCredential=yes
+  -o GSSAPIAuthentication=yes
+  -o GSSAPIKeyExchange=yes
   username@clustername.pdc.kth.se
 \end{verbatim}
 \end{block}
@@ -156,4 +157,5 @@ $ ssh username@clustername.pdc.kth.se
 \end{block}
 
 \alert{Always create a kerberos ticket on your local system}
+\alert{https://www.pdc.kth.se/resources/software/login-1}
 \end{frame}

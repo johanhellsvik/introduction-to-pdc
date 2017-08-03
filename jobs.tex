@@ -13,7 +13,7 @@
   \item We want balanced load of the resources
   \item Fair share according to time allocations
   \item Only persons/groups belonging to a time allocation can run \\~
-  \item We use a queuing/batch system
+  \item We use a queueing/batch system
 
   \end{itemize}
  }
@@ -31,13 +31,13 @@
   \item Provides a framework for \alert{starting}, \alert{executing}, and \alert{monitoring} work on the set of allocated nodes
   \item \alert{Arbitrates contention} for resources by managing a queue 
  \end{itemize}
- \item Job Prority computed based on 
+ \item Job Priority computed based on 
  \begin{description}
     \item [Age] the length of time a job has been waiting
     \item [Fair-share] the difference between the portion of the computing resource that has been promised and the amount of resources that has been consumed
     \item [Job size] the number of nodes or CPUs a job is allocated
     \item [Partition] a factor associated with each node partition
-    \item [QOS] a factor associated with each Quality Of Service
+%    \item [QOS] a factor associated with each Quality Of Service
  \end{description}
 \end{itemize}
 }

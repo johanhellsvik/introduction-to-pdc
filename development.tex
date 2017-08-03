@@ -5,16 +5,16 @@
 \framesubtitle{on HPC clusters}
  \begin{description}
     \item [source code] C / C++ / Fortran ( \verb|.c, .cpp, .f90, .h|  )
-    \item [compiled] Cray/Intel/GNU compilers\\ include headers, expand macros (\verb|.i,.ii| )
-    \item [assembled] into machine code (\verb|.o, .obj| )
-    \item [linked] Static Libraries (\verb|.lib, .a|  ) \\ Shared Library (\verb|.dll, .so| )
+    \item [compile] Cray/Intel/GNU compilers\\ include headers, expand macros (\verb|.i,.ii| )
+    \item [assemble] into machine code (\verb|.o, .obj| )
+    \item [link] Static Libraries (\verb|.lib, .a|  ) \\ Shared Library (\verb|.dll, .so| )
     \item ~ 
     \item [request allocation] submit job request to SLURM queuing system \\ \verb|salloc/sbatch|
     \item [run] application on scheduled resources \\ \verb|aprun/mpirun|
  \end{description}
 \end{frame}
 
-\subsection{Compiliers}
+\subsection{Compilers}
 \begin{frame}[fragile]
 \frametitle{Compiling serial and/or parallel code}
 \framesubtitle{specific to \alert{Tegner}}
@@ -122,7 +122,7 @@ setenv		 GCC_PATH /opt/gcc/4.9.1
 \subsection{Programming environments}
 \begin{frame}[fragile]
   \frametitle{Programming Environment Modules}
-  \framesubtitle{specific to \alert{Beskow only}}
+  \framesubtitle{specific to \alert{Beskow}}
 
 \begin{columns}[t]
 \column{.7\textwidth}
