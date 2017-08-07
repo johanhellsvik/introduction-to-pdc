@@ -1,4 +1,9 @@
+*.tex~
 *.aux
 *.pdf
 *.nav
 *.log
+presentation.out
+presentation.snm
+presentation.toc
+presentation.vrb
