@@ -9,11 +9,13 @@
     \item compiling small programs,
     \item other computationally light tasks.
   \end{itemize}
-  \item \alert{Never run calculations interactively on the login node}
-  \item We want balanced load of the resources
-  \item Fair share according to time allocations
-  \item Only persons/groups belonging to a time allocation can run \\~
-  \item We use a queueing/batch system
+  \item \alert{Never run calculations interactively on the login node} 
+  \item Instead, request compute resources \textit{interactively} or via \textit{batch script} \\~
+
+  \item All jobs must be connected to a time allocation
+  \item For courses, PDC sets up a \textit{reservation} for resources \\~
+
+  \item To manage the workload on the clusters, PDC uses a queueing/batch system
 
   \end{itemize}
  }
@@ -21,7 +23,7 @@
 
 \subsection{SLURM}
 \frame{
-\frametitle{SLURM queueing system}
+\frametitle{SLURM workload manager}
 \framesubtitle{Simple Linux Utility for Resource Management}
 
 \begin{itemize}
@@ -47,7 +49,7 @@
 \begin{frame}[fragile]
 \frametitle{Interactive session \hfill \alert{\textbf{salloc}}}
 
-\begin{exampleblock}{Request for an interactive allocation or resources}
+\begin{exampleblock}{Request an interactive allocation of resources}
   \begin{verbatim}
   $ salloc -A <account> -t <d-hh:mm:ss> -N <nodes>
   salloc: Granted job allocation 123456
@@ -56,9 +58,10 @@
 
 \begin{exampleblock}{Run application on \alert{\textbf{Beskow}}}
   \begin{verbatim}
-  $ aprun -n <PEs> -d <depth> ./binary.x
+  $ aprun -n <PEs> -d <depth> -N <PEs_per_node> ./binary.x
 #PEs 	- number of processing elements
 #depth 	- number of threads (depth) per PE
+#PEs_per_node 	- PEs per node
   \end{verbatim}
 \end{exampleblock}
   
@@ -84,9 +87,9 @@ Submitted batch job 958287
 The script should contain all necessary data to identify the account and requested resources 
 \begin{exampleblock}{Example of request to run myexe for 1 hour on 4 nodes}
   \begin{verbatim}
-# set !/bin/bash -l
+#!/bin/bash -l
 
-#SBATCH -A 201X-X-XX
+#SBATCH -A summer-2017
 #SBATCH -J myjob
 #SBATCH -t 1:00:00
 #SBATCH --nodes=4
@@ -101,7 +104,7 @@ aprun -n 128 ./myexe > my_output_file 2>&1
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Monintoring and/or canceling running jobs }
+\frametitle{Monitoring and/or cancelling running jobs }
 \begin{alertblock}{\textbf{squeue} -u  \$USER}
   Displays all queue and/or running jobs that belong to the user
 \tiny
@@ -114,7 +117,7 @@ cira@beskow-login2:~> squeue -u cira
 \end{alertblock}
 
 \begin{alertblock}{\textbf{scancel} [job]}
-Stops a runing job or removes a pending one from the queue
+Stops a running job or removes a pending one from the queue
 \tiny
   \begin{verbatim}
 cira@beskow-login2:~> scancel 957519
