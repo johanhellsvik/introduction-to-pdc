@@ -1,7 +1,33 @@
 \section*{Login and running}
 
 \begin{frame}[fragile]
-  \frametitle{Kerberos}
+  \frametitle{Login and running}
+
+\footnotesize
+\begin{exampleblock}{\large{Login}}
+\begin{itemize}
+  \item Some configuration steps are needed to log in to PDC 
+  \item Depends on OS: https://www.pdc.kth.se/resources/software/login-1
+  \item In short, Kerberos and SSH supporting GSSAPI key exchange must be installed 
+  \item Everything is already configured on the lab room Ubuntu machines, \alert{provided you use these custom commands:} \verb|pdc-kinit|, \verb|pdc-klist|, \verb|pdc-ssh|, \verb|pdc-scp|, ...
+  \item If needed, you will receive help to connect from your own laptops
+  \item We also have bootable USB sticks with Ubuntu where everything is ready
+\end{itemize}
+\end{exampleblock}
+
+\begin{exampleblock}{\large{Live demo}}
+\begin{itemize}
+  \item We will now demonstrate some key steps in logging in and running on Beskow
+  \item Remember to replace \verb|kinit|, \verb|ssh| etc. with \verb|pdc-kinit|, \verb|pdc-ssh| etc. if working on KTH-Ubuntu machine
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{SSH}
   \begin{alertblock}{SSH configuration}
     \verbatimfont{\footnotesize}
     \begin{verbatim}
@@ -26,7 +52,6 @@ Host *
 \end{alertblock}
 
 \end{frame}
-
 
 %-------------------------------------------------------------------------------------
 
