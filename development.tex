@@ -53,15 +53,25 @@ $ pgf90 -mp source.F90
   $ icc   -openmp source.c	
   $ icpc  -openmp source.cpp
   $ ifort -openmp source.F90
-
   $ module add i-compilers intelmpi
   $ mpiicc 	-openmp source.c
   $ mpiicpcp 	-openmp source.cpp
   $ mpiifort 	-openmp source.F90
   \end{verbatim}
   \end{exampleblock}
+
+  \begin{exampleblock}{CUDA compilers (\textbf{cuda})}
+  \scriptsize
+  \begin{verbatim}
+  $ module load cuda
+  $ nvcc source.cu
+  $ nvcc -arch=sm_37  source.cu
+  \end{verbatim}
+  \end{exampleblock}
+
 \end{columns}
 \end{frame}
+
 
 \subsection{Modules}
 \begin{frame}[fragile]
