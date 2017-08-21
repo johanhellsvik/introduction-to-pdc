@@ -166,7 +166,7 @@ g++ (GCC) 4.9.1 20140716 (Cray Inc.)
 %-------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
-  \frametitle{Interactive job}
+  \frametitle{Interactive job on Beskow}
   \begin{alertblock}{Go to Klemming and start interactive session}
     \verbatimfont{\footnotesize}
     \begin{verbatim}
@@ -188,6 +188,39 @@ nid01610
 $ exit
 salloc: Relinquishing job allocation 1733497
 salloc: Job allocation 1733497 has been revoked.
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Interactive job on Tegner}
+  \begin{alertblock}{Go to Klemming and start interactive session}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@tegner-login-1:~$ cd /cfs/klemming/nobackup/k/kthw/
+
+# (command line shortened below here)
+$ mkdir my_job
+$ cd my_job
+$ salloc -A summer-2017 -N 1 -t 0:10:0
+salloc: job 666061 has been allocated resources
+salloc: Waiting for resource configuration
+salloc: Nodes t03n03 are ready for job
+
+# either run on allocated node using srun/mpirun, or by logging into node
+$ srun -n 1 hostname
+t03n03.pdc.kth.se
+# to log in to node, must open new terminal:
+local-machine $ ssh kthw@t03n03.pdc.kth.se
+t03n03 $ mpirun -np 24 my_code.x
 
  \end{verbatim}
 \end{alertblock}
