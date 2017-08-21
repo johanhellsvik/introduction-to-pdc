@@ -109,12 +109,27 @@ Refers to the entries in the authentication server database  (\verb|username@NAD
 
 \begin{frame}[fragile]
 \frametitle{Kerberos commands}
+
+\begin{columns}[t]
+\column{.5\textwidth}
+\alert{Normal commands:}
 \begin{description}
  \item [kinit] generates ticket
  \item [klist] lists kerberos tickets
  \item [kdestroy] destroys ticket file
  \item [kpasswd] changes password
 \end{description}
+
+\column{.5\textwidth}
+\alert{On KTH-Ubuntu machines:}
+\begin{description}
+ \item [pdc-kinit] 
+ \item [pdc-klist] 
+ \item [pdc-kdestroy]
+ \item [pdc-kpasswd] 
+\end{description}
+\end{columns}
+
 \scriptsize
 \begin{block}{}
   \begin{verbatim}
