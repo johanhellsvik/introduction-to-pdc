@@ -1,0 +1,298 @@
+\section*{Login and running}
+
+\begin{frame}[fragile]
+  \frametitle{Login and running}
+
+\footnotesize
+\begin{exampleblock}{\large{Login}}
+\begin{itemize}
+  \item Some configuration steps are needed to log in to PDC 
+  \item Depends on OS: https://www.pdc.kth.se/resources/software/login-1
+  \item In short, Kerberos and SSH supporting GSSAPI key exchange must be installed 
+  \item Everything is already configured on the lab room Ubuntu machines, \alert{provided you use these custom commands:} \verb|pdc-kinit|, \verb|pdc-klist|, \verb|pdc-ssh|, \verb|pdc-scp|, ...
+  \item If needed, you will receive help to connect from your own laptops
+  \item We also have bootable USB sticks with Ubuntu where everything is ready
+\end{itemize}
+\end{exampleblock}
+
+\begin{exampleblock}{\large{Live demo}}
+\begin{itemize}
+  \item We will now demonstrate some key steps in logging in and running on Beskow
+  \item Remember to replace \verb|kinit|, \verb|ssh| etc. with \verb|pdc-kinit|, \verb|pdc-ssh| etc. if working on KTH-Ubuntu machine
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{SSH}
+  \begin{alertblock}{SSH configuration}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+kthw@local~$ cat .ssh/config
+# Hosts we want to authenticate to with Kerberos
+Host *.kth.se *.kth.se.
+# User authentication based on GSSAPI is allowed
+GSSAPIAuthentication yes
+# Key exchange based on GSSAPI may be used for server authentication
+GSSAPIKeyExchange yes
+# Hosts to which we want to delegate credentials
+Host *.csc.kth.se *.csc.kth.se. *.nada.kth.se *.nada.kth.se. \
+     *.pdc.kth.se *.pdc.kth.se.
+# Forward (delegate) credentials (tickets) to the server.
+GSSAPIDelegateCredentials yes
+# Prefer GSSAPI key exchange
+PreferredAuthentications gssapi-keyex,gssapi-with-mic
+# All other hosts
+Host *
+
+ \end{verbatim}
+\end{alertblock}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Kerberos}
+  \begin{alertblock}{Kerberos configuration}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@local~$ cat /etc/krb5.conf
+[domain_realm]
+   .pdc.kth.se = NADA.KTH.SE
+[appdefaults]
+   forwardable = yes
+   forward = yes
+   krb4_get_tickets = no
+[libdefaults]
+   default_realm = NADA.KTH.SE
+   dns_lookup_realm = true
+   dns_lookup_kdc = true
+
+ \end{verbatim}
+\end{alertblock}
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Kerberos}
+  \begin{alertblock}{Create and list tickets}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+kthw@local~$ klist
+klist: No credentials cache found
+      
+kthw@local~$ kinit -f kthw@NADA.KTH.SE
+Password for kthw@NADA.KTH.SE:
+
+kthw@local~$ klist -Tf  
+Ticket cache: KCM:501
+Default principal: kthw@NADA.KTH.SE
+
+Valid starting       Expires              Service principal
+08/03/2017 16:39:56  08/04/2017 16:39:50  krbtgt/NADA.KTH.SE@NADA.KTH.SE
+   Flags: FIA
+
+  \end{verbatim}
+  \end{alertblock}
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+
+\begin{frame}[fragile]
+  \frametitle{Login}
+  \begin{alertblock}{Log in to Beskow, check ticket}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@local:~$ ssh kthw@beskow.pdc.kth.se
+kthw@beskow-login2:~$ klist -f
+
+Credentials cache: FILE:/tmp/krb5cc_H26527
+    Principal: kthw@NADA.KTH.SE
+
+Issued                Expires             Flags    Principal
+Aug  3 16:41:51 2017  Aug  4 16:39:50 2017  FfA    krbtgt/NADA.KTH.SE@NADA.KTH.SE
+Aug  3 16:41:52 2017  Aug  4 16:39:50 2017  fA     afs/pdc.kth.se@NADA.KTH.SE
+Aug  3 16:41:52 2017  Aug  4 16:39:50 2017  fA     afs@NADA.KTH.SE
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+
+\begin{frame}[fragile]
+  \frametitle{Modules}
+  \begin{alertblock}{Inspect module system}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@beskow-login2:~$ module list
+...
+kthw@beskow-login2:~$ module avail
+...
+kthw@beskow-login2:~$ module avail gcc
+...
+kthw@beskow-login2:~$ CC -V
+Cray C++ : Version 8.3.4  Mon Aug 07, 2017  15:04:06
+kthw@beskow-login2:~$ module swap PrgEnv-cray PrgEnv-gnu
+kthw@beskow-login2:~$ CC --version
+g++ (GCC) 4.9.1 20140716 (Cray Inc.)
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Interactive job on Beskow}
+  \begin{alertblock}{Go to Klemming and start interactive session}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/
+
+# (command line shortened below here)
+$ mkdir my_job
+$ cd my_job
+$ salloc -A summer-2017 --reservation=summer-2017-08-15 -N 1 -t 0:10:0
+salloc: Granted job allocation 1733496
+
+$ hostname
+beskow-login2.pdc.kth.se
+
+$ aprun -n 1 hostname
+nid01610
+
+$ exit
+salloc: Relinquishing job allocation 1733497
+salloc: Job allocation 1733497 has been revoked.
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Interactive job on Tegner}
+  \begin{alertblock}{Go to Klemming and start interactive session}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@tegner-login-1:~$ cd /cfs/klemming/nobackup/k/kthw/
+
+# (command line shortened below here)
+$ mkdir my_job
+$ cd my_job
+$ salloc -A summer-2017 -N 1 -t 0:10:0
+salloc: job 666061 has been allocated resources
+salloc: Waiting for resource configuration
+salloc: Nodes t03n03 are ready for job
+
+# either run on allocated node using srun/mpirun, or by logging into node
+$ srun -n 1 hostname
+t03n03.pdc.kth.se
+# to log in to node, must open new terminal:
+local-machine $ ssh kthw@t03n03.pdc.kth.se
+t03n03 $ mpirun -np 24 my_code.x
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Batch job}
+  \begin{alertblock}{Compile code and write batch script}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+$ cp ~/Public/hello_world.f90 .
+$ ftn -o hello_world.x hello_world.f90
+
+$ cat <<EOF > submit.bash
+#!/bin/bash -l
+
+#SBATCH -A summer-2017
+#SBATCH -J myjob
+#SBATCH -t 0:10:00
+#SBATCH -N 1
+#SBATCH --reservation=summer-2017-08-15
+#SBATCH -e error_file.e
+#SBATCH -o output_file.o
+
+aprun -n 32 ./hello_world.x > my_output_file 2>&1
+
+EOF
+
+ \end{verbatim}
+\end{alertblock}
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Batch job}
+  \begin{alertblock}{Submit and monitor job}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+$ sbatch submit.bash
+$ squeue -u kthw
+JOBID USER ACCOUNT NAME  ST REASON START_TIME TIME TIME_LEFT NODES CPUS
+1735211 kthw pdc.sta myjob R None 2017-08-07T16:31:01 0:00 10:00 1 64
+
+$ cat my_output_file
+ Hello from rank           31  of           32
+ Hello from rank           13  of           32
+ Hello from rank           26  of           32
+ Hello from rank           10  of           32
+ Hello from rank           17  of           32
+ Hello from rank           14  of           32
+ Hello from rank            1  of           32
+...
+
+
+ \end{verbatim}
+\end{alertblock}
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+

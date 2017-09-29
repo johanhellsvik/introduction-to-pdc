@@ -9,6 +9,9 @@
 \usepackage{multicol}
 %\usepackage{animate}
 \usepackage{verbatim}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
 \usepackage{hyperref}
 \usepackage{tikz}
 
@@ -77,7 +80,7 @@
 
 
 
-\title{Introduction to PDC environement}
+\title{Introduction to PDC environment}
 \subtitle{}
 
 \author{Thor Wikfeldt}
@@ -154,6 +157,7 @@
 \include{development}
 \include{jobs}
 \include{conclusion}
+\include{live_demo}
 \include{unix_shell}
 
 \end{document}
