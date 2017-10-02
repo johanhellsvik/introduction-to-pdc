@@ -40,11 +40,12 @@
 \column{.6\textwidth}
   \begin{itemize}
     \item Lifetime: Q4 2018	
-    \item $9$ racks $1676$ nodes
-    \item Intel® Xeon® Processor E5-2698 v3\\ 40M Cache, 2.30 GHz
-    \item $53.632$ cores - $32$ cores/node
+    \item $11$ racks $2060$ nodes
+    \item Intel® Haswell Processor 2.30 GHz \\
+    Intel® Broadwell, 2.10 GHz 
+    \item $67,456$ cores - $32/36$ cores/node
     \item Aries Dragonfly network topology
-    \item $104.7$ TB  memory - $64$ GB/node
+    \item $104.7$ TB  memory - $64/128$ GB/node
    \end{itemize}
 \column{.4\textwidth}
   \includegraphics[width=\columnwidth]{xc30-blade}
@@ -62,26 +63,29 @@
 \framesubtitle{pre/post processing for Beskow}
 
 \begin{columns}
-\column{.3\textwidth}
+\column{.4\textwidth}
 \scriptsize
   \begin{alertblock}{$5$ x $2$TB Fat nodes}
-    $4$ x $12$ core Ivy Bridge\\
-    $2$TB RAM \\
+    $4$ x $12$ core Ivy Bridge, $2$TB RAM \\
     $2$ x Nvidia Quadro K420
   \end{alertblock}
   
   \begin{alertblock}{$5$ x $1$TB Fat nodes}
-    4x 12 core Ivy Bridge \\
-    $1$TB RAM \\
+    4x 12 core Ivy Bridge, $1$TB RAM \\
     $2$ x Nvidia Quadro K420
   \end{alertblock}
   
-  \begin{alertblock}{$55$ Thin Nodes}
-    $2$ x $12$ core Haswell \\
-    $512$GB RAM \\
+  \begin{alertblock}{$65$ Thin Nodes}
+    $2$ x $12$ core Haswell, $512$GB RAM \\
     Nvidia Quadro K420 GPU
   \end{alertblock}
-\column{.7\textwidth}
+
+  \begin{alertblock}{$9$ K80 Nodes}
+    $2$ x $12$ core Haswell, $512$GB RAM \\
+    Nvidia Tesla K80 GPU
+  \end{alertblock}
+
+\column{.6\textwidth}
 \normalsize
 \centering\includegraphics[width=.5\columnwidth]{k420}
   
@@ -89,6 +93,7 @@
     \item Used for pre/post processing data 
     \item Has large RAM nodes
     \item Has nodes with GPUs
+    \item Has two transfer nodes
     \item Lifetime: Q4 2018 
   \end{itemize}
 \end{columns}
@@ -102,10 +107,10 @@
 \begin{table}
   \begin{tabular}{r|l|l}
    & \alert{Beskow} & \alert{Tegner}\\ \hline \hline
-  Cores in each node &	$32$ & $48/24$\\\hline
-  Nodes &	$1.676$ & 50 x  $24$ Haswell/GPU\\
+  Cores in each node &	$32/36$ & $48/24$\\\hline
+  Nodes & 2,060 & 74 x 24 Haswell/GPU\\
   &&$10$ x $48$ Ivy bridge\\\hline
-  RAM (GB) & $1.676$ x $64$	& $50$ x $512$GB\\
+  RAM (GB) & $64$ or $128$ & $74$ x $512$GB\\
   && $5$ x $1024$GB\\
   && $5$ x $2$TB\\\hline
   Allocations &&\\
