@@ -1,7 +1,7 @@
 \section*{Login and running}
 
 \begin{frame}[fragile]
-  \frametitle{Login and running}
+  \frametitle{Hands-on exercise}
 
 \footnotesize
 \begin{exampleblock}{\large{Login}}
@@ -9,16 +9,15 @@
   \item Some configuration steps are needed to log in to PDC 
   \item Depends on OS: https://www.pdc.kth.se/resources/software/login-1
   \item In short, Kerberos and SSH supporting GSSAPI key exchange must be installed 
-  \item Everything is already configured on the lab room Ubuntu machines, \alert{provided you use these custom commands:} \verb|pdc-kinit|, \verb|pdc-klist|, \verb|pdc-ssh|, \verb|pdc-scp|, ...
   \item If needed, you will receive help to connect from your own laptops
-  \item We also have bootable USB sticks with Ubuntu where everything is ready
 \end{itemize}
 \end{exampleblock}
 
 \begin{exampleblock}{\large{Live demo}}
 \begin{itemize}
-  \item We will now demonstrate some key steps in logging in and running on Beskow
-  \item Remember to replace \verb|kinit|, \verb|ssh| etc. with \verb|pdc-kinit|, \verb|pdc-ssh| etc. if working on KTH-Ubuntu machine
+  \item We will now demonstrate some key steps in logging in and running at PDC
+  \item We will generate Kerberos tickets and log in with ssh
+  \item We will compile and run MPI, OpenMP and CUDA code on Beskow and Tegner
 \end{itemize}
 \end{exampleblock}
 
@@ -28,7 +27,7 @@
 %-------------------------------------------------------------------------------------
 \begin{frame}[fragile]
   \frametitle{SSH}
-  \begin{alertblock}{SSH configuration}
+  \begin{alertblock}{SSH configuration (Linux and Mac)}
     \verbatimfont{\footnotesize}
     \begin{verbatim}
 kthw@local~$ cat .ssh/config
@@ -57,7 +56,7 @@ Host *
 
 \begin{frame}[fragile]
   \frametitle{Kerberos}
-  \begin{alertblock}{Kerberos configuration}
+  \begin{alertblock}{Kerberos configuration (Linux and Mac)}
     \verbatimfont{\footnotesize}
     \begin{verbatim}
 
@@ -174,9 +173,7 @@ g++ (GCC) 4.9.1 20140716 (Cray Inc.)
 kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/
 
 # (command line shortened below here)
-$ mkdir my_job
-$ cd my_job
-$ salloc -A summer-2017 --reservation=summer-2017-08-15 -N 1 -t 0:10:0
+$ salloc -A pdc-test-2017 -N 1 -t 0:10:0
 salloc: Granted job allocation 1733496
 
 $ hostname
@@ -200,6 +197,38 @@ salloc: Job allocation 1733497 has been revoked.
 %-------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
+  \frametitle{Interactive job on Beskow}
+  \begin{alertblock}{We compile and run MPI and OpenMP codes}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@beskow-login2:~$ mkdir -p /cfs/klemming/nobackup/k/kthw/pdc_intro/mpi
+kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/pdc_intro/mpi
+$ cp ~kthw/Public/pdc_intro/hello_world.f90 .
+$ module swap PrgEnv-cray PrgEnv-gnu
+$ salloc -A pdc-test-2017 -N 1 -t 0:10:0
+salloc: Granted job allocation 1733496
+$ ftn -O2 hello_world.f90 -o hello.x
+$ aprun -n 32 ./hello.x
+
+$ mkdir ../omp
+$ cd ../omp
+$ cp ~kthw/Public/pdc_intro/omp_hello.c .
+$ cc -fopenmp omp_hello.c -o omp_hello.x
+$ export OMP_NUM_THREADS=32
+$ aprun -n 1 -d 32 ./omp_hello.x
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
   \frametitle{Interactive job on Tegner}
   \begin{alertblock}{Go to Klemming and start interactive session}
     \verbatimfont{\footnotesize}
@@ -207,10 +236,7 @@ salloc: Job allocation 1733497 has been revoked.
 
 kthw@tegner-login-1:~$ cd /cfs/klemming/nobackup/k/kthw/
 
-# (command line shortened below here)
-$ mkdir my_job
-$ cd my_job
-$ salloc -A summer-2017 -N 1 -t 0:10:0
+$ salloc -A pdc-test-2017 -N 1 -t 0:10:0
 salloc: job 666061 has been allocated resources
 salloc: Waiting for resource configuration
 salloc: Nodes t03n03 are ready for job
@@ -233,8 +259,35 @@ t03n03 $ mpirun -np 24 my_code.x
 %-------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
+  \frametitle{Interactive job on Tegner}
+  \begin{alertblock}{We compile and run a CUDA code}
+    \verbatimfont{\footnotesize}
+    \begin{verbatim}
+
+kthw@tegner-login-1:~$ mkdir -p /cfs/nobackup/k/kthw/pdc_intro/cuda
+kthw@tegner-login-1:~$ cd /cfs/nobackup/k/kthw/pdc_intro/cuda
+$ cp ~kthw/Public/pdc_intro/hello.cu .
+$ module load cuda/8.0
+$ salloc -A pdc-test-2017 -N 1 -t 0:10:0 --gres=gpu:K420:1
+salloc: job 674692 has been allocated resources
+salloc: Nodes t02n17 are ready for job
+$ nvcc hello.cu -o hello.x # for K80 nodes, also need -arch=sm_37
+$ srun ./hello.x
+Hello World!
+
+ \end{verbatim}
+\end{alertblock}
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
   \frametitle{Batch job}
-  \begin{alertblock}{Compile code and write batch script}
+  \begin{alertblock}{Compile code and write batch script (Beskow)}
     \verbatimfont{\footnotesize}
     \begin{verbatim}
 
@@ -244,11 +297,10 @@ $ ftn -o hello_world.x hello_world.f90
 $ cat <<EOF > submit.bash
 #!/bin/bash -l
 
-#SBATCH -A summer-2017
+#SBATCH -A pdc-test-2017
 #SBATCH -J myjob
 #SBATCH -t 0:10:00
 #SBATCH -N 1
-#SBATCH --reservation=summer-2017-08-15
 #SBATCH -e error_file.e
 #SBATCH -o output_file.o
 
@@ -296,3 +348,5 @@ $ cat my_output_file
 
 %-------------------------------------------------------------------------------------
 
+
+\frame{\huge\centering Questions...?}
