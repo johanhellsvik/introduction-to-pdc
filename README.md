@@ -4,3 +4,7 @@ This is a presentation that can be used to introduce PDC in various courses, inc
 the PDC summer school, Introduction to PDC courses, and other KTH courses which 
 use PDC resources. The presentation is currently in LaTeX using the beamer package.
 
+Compile with `pdflatex presentation.tex`.
+
+
+
