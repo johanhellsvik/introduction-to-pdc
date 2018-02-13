@@ -75,7 +75,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Launch jobs in the backgound \hfill  \alert{\textbf{sbatch}}}
+\frametitle{Launch batch jobs \hfill  \alert{\textbf{sbatch}}}
 \begin{exampleblock}{Submit the job to SLURM queue}
   \begin{verbatim}
 $ sbatch <script>
@@ -89,7 +89,7 @@ The script should contain all necessary data to identify the account and request
   \begin{verbatim}
 #!/bin/bash -l
 
-#SBATCH -A summer-2017
+#SBATCH -A edu17.intrompi
 #SBATCH -J myjob
 #SBATCH -t 1:00:00
 #SBATCH --nodes=4
