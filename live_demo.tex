@@ -7,17 +7,17 @@
 \begin{exampleblock}{\large{Login}}
 \begin{itemize}
   \item Some configuration steps are needed to log in to PDC 
-  \item Depends on OS: https://www.pdc.kth.se/resources/software/login-1
+  \item Depends on OS: https://www.pdc.kth.se/support/documents/login/login.html
   \item In short, Kerberos and SSH supporting GSSAPI key exchange must be installed 
   \item If needed, you will receive help to connect from your own laptops
 \end{itemize}
 \end{exampleblock}
 
-\begin{exampleblock}{\large{Live demo}}
+\begin{exampleblock}{\large{Exercises}}
 \begin{itemize}
-  \item We will now demonstrate some key steps in logging in and running at PDC
-  \item We will generate Kerberos tickets and log in with ssh
-  \item We will compile and run MPI, OpenMP and CUDA code on Beskow and Tegner
+  \item You will now practice key steps in using PDC resources
+  \item The example source code and batch scripts can be found at \verb|/afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz|,
+    or in the GitHub repository \verb|https://github.com/PDC-support/introduction-to-pdc| (in the intro-course branch)
 \end{itemize}
 \end{exampleblock}
 
@@ -25,6 +25,241 @@
 
 
 %-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Login}
+\begin{itemize}
+  \item Start by logging in to Beskow
+  \item Where are you after login?
+    \begin{itemize}
+      \item What is your current directory?
+      \item What's the name of the login node?
+    \end{itemize}
+  \item Have a look at the currently running processes on the login node
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Login}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item The \verb|pwd| command shows your current directory:
+    \begin{verbatim}
+      $ pwd
+      /afs/pdc.kth.se/home/k/kthw
+    \end{verbatim}
+
+    \item The \verb|hostname| command shows the hostname of the login node:
+    \begin{verbatim}
+      $ hostname
+      beskow-login2.pdc.kth.se
+    \end{verbatim}
+
+    \item The \verb|top| command shows a snapshot of currently running processes:
+    \begin{verbatim}
+      $ top
+    \end{verbatim}
+
+    \item Note that the login node is a shared resource!
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Disk quota, listing projects (allocations)}
+\begin{itemize}
+  \item Check your AFS disk quota (hint: you will need the \verb|fs| command, type \verb|fs help| to see available subcommands)
+  \item Go to your klemming nobackup directory. Can you run \verb|fs| there?
+  \item Check which allocation(s) you belong to using the \verb|projinfo| command
+    \begin{itemize}
+      \item Check all options of \verb|projinfo| using the \verb|-h| flag
+      \item How much have your allocations been used, and for how long are they valid?
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Disk quota, listing projects (allocations)}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item The \verb|fs lq| command shows the name of the AFS volume of your home directory, your disk quota and usage:
+    \begin{verbatim}
+      $ fs lq
+    \end{verbatim}
+
+    \item \verb|fs lq| only works on AFS. You can type \verb|df -h .| instead, but there's no quota on your klemming usage:
+    \begin{verbatim}
+      $ df -h .
+Filesystem     Size  Used Avail Use% Mounted on
+...:/klemming  5.2P  4.4P  730T  86% /cfs/klemming
+    \end{verbatim}
+
+    \item The \verb|projinfo| command accesses a database that contains logs of all allocations 
+    \begin{verbatim}
+      $ projinfo
+    \end{verbatim}
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Working with modules}
+\begin{itemize}
+  \item List the modules that are currently loaded (hint: type \verb|module help|)
+  \item List all the modules that are available on Beskow
+  \item List all available modules named \verb|PrgEnv|
+  \item Swap from the \verb|PrgEnv-cray| to the \verb|PrgEnv-gnu| module
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Working with  modules}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item Listing all loaded modules and all available modules is done like this:
+    \begin{verbatim}
+      $ module list
+      $ module avail
+    \end{verbatim}
+
+    \item To list all modules matching a pattern (like PrgEnv), type
+    \begin{verbatim}
+      $ module avail PrgEnv
+    \end{verbatim}
+
+    \item To swap programming environments (i.e. compiler environments), type
+    \begin{verbatim}
+      $ module swap PrgEnv-cray PrgEnv-gnu
+    \end{verbatim}
+    After swapping these modules, the compiler wrappers \verb|CC, cc| and \verb|ftn| point to the GNU compilers (instead of the 
+    Cray compilers)
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Compiling code}
+\begin{itemize}
+  \item Copy the tarball \verb|/afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz| to  
+    your nobackup directory, and unpack it
+  \item Now compile the MPI example code \verb|hello_world_mpi.c|
+    \begin{itemize}
+      \item Do you need to load any MPI libraries?
+      \item What compiler will be used when using the \verb|cc| compiler wrapper?
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Compiling code}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item Copying and extracting the tarball to your klemming directory:
+    \begin{verbatim}
+      $ cd /cfs/klemming/nobackup/k/kthw
+      $ cp /afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz .
+      $ tar zxf pdc_test.tar.gz
+      $ cd pdc_test
+    \end{verbatim}
+
+    \item When using the compiler wrappers CC, cc and ftn, no MPI or numerical libraries need to be loaded 
+      or linked to explicitly!
+    \begin{verbatim}
+      $ cc -o hello_world_mpi hello_world_mpi.c
+    \end{verbatim}
+    \item Which compiler did we just compile with?
+    \begin{verbatim}
+      $ cc --version
+      gcc (GCC) 4.9.1 20140716 (Cray Inc.)
+    \end{verbatim}
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Submitting jobs}
+\begin{itemize}
+  \item Open the batch script \verb|sbatch_beskow.sh| in your favorite editor (emacs or vim)
+    \begin{itemize}
+      \item Set the allocation ID to \verb|edu18.intropdc|
+      \item Set that the job should run on two nodes, with 16 processes running on each node
+      \item Set the requested time of the job to 2 minutes
+    \end{itemize}
+  \item Submit the job to the SLURM queue!
+  \item Monitor the queue to see if your job is running
+  \item What output did you get?
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Submitting jobs}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item The allocation, number of nodes and time are set with these flags
+    \begin{verbatim}
+      #SBATCH -A edu18.intropdc
+      #SBATCH -t 0:02:00
+      #SBATCH --nodes=2
+    \end{verbatim}
+
+    \item If you want to run 32 MPI processes in total, with 16 processes on each node, both the \verb|-n| and \verb|-N| flags 
+      to \verb|aprun| must be used:
+    \begin{verbatim}
+      aprun -n 32 -N 16 ./hello_world_mpi
+    \end{verbatim}
+
+    \item The job is submitted and monitored like this:
+    \begin{verbatim}
+      $ sbatch sbatch_beskow.sh
+      $ squeue -u <username>
+    \end{verbatim}
+
+    \item The output gets written to a default filename:
+    \begin{verbatim}
+      $ cat slurm-2559495.out
+      Hello world from rank 0 out of 32 process
+      Hello world from rank 4 out of 32 process
+      ...
+    \end{verbatim}
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]
   \frametitle{SSH}
   \begin{alertblock}{SSH configuration (Linux and Mac)}
@@ -173,7 +408,7 @@ g++ (GCC) 4.9.1 20140716 (Cray Inc.)
 kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/
 
 # (command line shortened below here)
-$ salloc -A pdc-test-2017 -N 1 -t 0:10:0
+$ salloc -A edu17.intrompi -N 1 -t 0:10:0 --res=edu-Dec-11
 salloc: Granted job allocation 1733496
 
 $ hostname
@@ -202,18 +437,16 @@ salloc: Job allocation 1733497 has been revoked.
     \verbatimfont{\footnotesize}
     \begin{verbatim}
 
-kthw@beskow-login2:~$ mkdir -p /cfs/klemming/nobackup/k/kthw/pdc_intro/mpi
-kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/pdc_intro/mpi
-$ cp ~kthw/Public/pdc_intro/hello_world.f90 .
+kthw@beskow-login2:~$ mkdir -p /cfs/klemming/nobackup/k/kthw/mpi_course
+kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/mpi_course
+$ cp ~kthw/Public/intro_mpi_dec2017/hello_world.f90 .
 $ module swap PrgEnv-cray PrgEnv-gnu
-$ salloc -A pdc-test-2017 -N 1 -t 0:10:0
+$ salloc -A edu17.intrompi --res=edu-Dec-11 -N 1 -t 0:10:0
 salloc: Granted job allocation 1733496
 $ ftn -O2 hello_world.f90 -o hello.x
 $ aprun -n 32 ./hello.x
 
-$ mkdir ../omp
-$ cd ../omp
-$ cp ~kthw/Public/pdc_intro/omp_hello.c .
+$ cp ~kthw/Public/intro_mpi_dec2017/omp_hello.c .
 $ cc -fopenmp omp_hello.c -o omp_hello.x
 $ export OMP_NUM_THREADS=32
 $ aprun -n 1 -d 32 ./omp_hello.x
@@ -228,62 +461,6 @@ $ aprun -n 1 -d 32 ./omp_hello.x
 
 %-------------------------------------------------------------------------------------
 
-\begin{frame}[fragile]
-  \frametitle{Interactive job on Tegner}
-  \begin{alertblock}{Go to Klemming and start interactive session}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
-
-kthw@tegner-login-1:~$ cd /cfs/klemming/nobackup/k/kthw/
-
-$ salloc -A pdc-test-2017 -N 1 -t 0:10:0
-salloc: job 666061 has been allocated resources
-salloc: Waiting for resource configuration
-salloc: Nodes t03n03 are ready for job
-
-# either run on allocated node using srun/mpirun, or by logging into node
-$ srun -n 1 hostname
-t03n03.pdc.kth.se
-# to log in to node, must open new terminal:
-local-machine $ ssh kthw@t03n03.pdc.kth.se
-t03n03 $ mpirun -np 24 my_code.x
-
- \end{verbatim}
-\end{alertblock}
-
-
-
-\end{frame}
-
-
-%-------------------------------------------------------------------------------------
-
-\begin{frame}[fragile]
-  \frametitle{Interactive job on Tegner}
-  \begin{alertblock}{We compile and run a CUDA code}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
-
-kthw@tegner-login-1:~$ mkdir -p /cfs/nobackup/k/kthw/pdc_intro/cuda
-kthw@tegner-login-1:~$ cd /cfs/nobackup/k/kthw/pdc_intro/cuda
-$ cp ~kthw/Public/pdc_intro/hello.cu .
-$ module load cuda/8.0
-$ salloc -A pdc-test-2017 -N 1 -t 0:10:0 --gres=gpu:K420:1
-salloc: job 674692 has been allocated resources
-salloc: Nodes t02n17 are ready for job
-$ nvcc hello.cu -o hello.x # for K80 nodes, also need -arch=sm_37
-$ srun ./hello.x
-Hello World!
-
- \end{verbatim}
-\end{alertblock}
-
-
-
-\end{frame}
-
-
-%-------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
   \frametitle{Batch job}
@@ -291,13 +468,14 @@ Hello World!
     \verbatimfont{\footnotesize}
     \begin{verbatim}
 
-$ cp ~/Public/hello_world.f90 .
+$ cp ~/Public/intro_mpi_dec2017/hello_world.f90 .
 $ ftn -o hello_world.x hello_world.f90
 
 $ cat <<EOF > submit.bash
 #!/bin/bash -l
 
-#SBATCH -A pdc-test-2017
+#SBATCH -A edu17.intrompi
+#SBATCH --reservation=edu-Dec-11
 #SBATCH -J myjob
 #SBATCH -t 0:10:00
 #SBATCH -N 1
