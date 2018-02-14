@@ -27,6 +27,38 @@
 %-------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
+  \frametitle{Hands-on exercise}
+
+\footnotesize
+
+\begin{exampleblock}{\large{Exercises}}
+The exercises below will demonstrate:
+\begin{enumerate}
+  \item Kerberos - creating and listing tickets
+  \item Login - via command line or PuTTY, and where you end up on PDC
+  \item AFS home, information on your projects, \verb|/cfs/klemming|
+  \item Working with modules
+  \item Compiling code
+  \item Submitting jobs
+  \item Running interactively
+\end{enumerate}
+\end{exampleblock}
+
+\begin{exampleblock}{\large{Further information}}
+\begin{itemize}
+  \item https://www.pdc.kth.se/support
+  \item https://hpc-carpentry.github.io/hpc-intro/
+  \item https://software-carpentry.org/lessons/
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+
+
+\begin{frame}[fragile]
   \frametitle{Kerberos}
 \begin{itemize}
   \item Two files should be created/edited to enable login to PDC, \verb|krb5.conf| and (linux and mac) \verb|.ssh/config|.
@@ -91,16 +123,23 @@ The first line is your Kerberos ticket, the second line your AFS token.
 \begin{exampleblock}{{Answer}}
     \verbatimfont{\footnotesize}
     \begin{itemize}
-    \item The \verb|pwd| command shows your current directory:
+    \item On Linux/MacOS, type one of these (use PuTTY on Windows):
     \begin{verbatim}
-      $ pwd
-      /afs/pdc.kth.se/home/k/kthw
+    $ ssh username@beskow.pdc.kth.se
+    $ ssh -o GSSAPIDelegateCredentials=yes -o GSSAPIKeyExchange=yes 
+      -o GSSAPIAuthentication=yes username@beskow.pdc.kth.se
+    \end{verbatim}
+
+    \item After logging in, \verb|pwd| shows your current directory:
+    \begin{verbatim}
+    $ pwd
+    /afs/pdc.kth.se/home/u/username
     \end{verbatim}
 
     \item The \verb|hostname| command shows the hostname of the login node:
     \begin{verbatim}
-      $ hostname
-      beskow-login2.pdc.kth.se
+    $ hostname
+    beskow-login2.pdc.kth.se
     \end{verbatim}
 
     \item The \verb|top| command shows a snapshot of currently running processes:
@@ -117,7 +156,7 @@ The first line is your Kerberos ticket, the second line your AFS token.
 
 %-------------------------------------------------------------------------------------
 \begin{frame}[fragile]
-  \frametitle{Disk quota, listing projects (allocations)}
+  \frametitle{AFS home, listing projects, /cfs/klemming}
 \begin{itemize}
   \item Check your AFS disk quota (hint: you will need the \verb|fs| command, type \verb|fs help| to see available subcommands)
   \item Go to your klemming nobackup directory. Can you run \verb|fs| there?
@@ -132,25 +171,25 @@ The first line is your Kerberos ticket, the second line your AFS token.
 
 %-------------------------------------------------------------------------------------
 \begin{frame}[fragile]
-  \frametitle{Disk quota, listing projects (allocations)}
+  \frametitle{AFS home, listing projects, /cfs/klemming}
 \begin{exampleblock}{{Answer}}
     \verbatimfont{\footnotesize}
     \begin{itemize}
     \item The \verb|fs lq| command shows the name of the AFS volume of your home directory, your disk quota and usage:
     \begin{verbatim}
-      $ fs lq
+    $ fs lq
     \end{verbatim}
 
     \item \verb|fs lq| only works on AFS. You can type \verb|df -h .| instead, but there's no quota on your klemming usage:
     \begin{verbatim}
-      $ df -h .
-Filesystem     Size  Used Avail Use% Mounted on
-...:/klemming  5.2P  4.4P  730T  86% /cfs/klemming
+    $ df -h .
+    Filesystem     Size  Used Avail Use% Mounted on
+    ...:/klemming  5.2P  4.4P  730T  86% /cfs/klemming
     \end{verbatim}
 
     \item The \verb|projinfo| command accesses a database that contains logs of all allocations 
     \begin{verbatim}
-      $ projinfo
+    $ projinfo
     \end{verbatim}
 
     \end{itemize}
@@ -225,7 +264,7 @@ Filesystem     Size  Used Avail Use% Mounted on
     \begin{itemize}
     \item Copying and extracting the tarball to your klemming directory:
     \begin{verbatim}
-      $ cd /cfs/klemming/nobackup/k/kthw
+      $ cd /cfs/klemming/nobackup/u/username # replace this!
       $ cp /afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz .
       $ tar zxf pdc_test.tar.gz
       $ cd pdc_test
