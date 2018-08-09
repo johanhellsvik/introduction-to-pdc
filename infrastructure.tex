@@ -39,12 +39,12 @@
 \begin{columns}
 \column{.6\textwidth}
   \begin{itemize}
-    \item Lifetime: Q4 2018	
-    \item $9$ racks $1676$ nodes
-    \item Intel® Xeon® Processor E5-2698 v3\\ 40M Cache, 2.30 GHz
-    \item $53.632$ cores - $32$ cores/node
+    \item Lifetime: Q4 2019	
+    \item $11$ racks, $2060$ nodes
+    \item Intel Haswell processor 2.3 GHz \\ Intel Broadwell processor 2.1 GHz
+    \item $67,456$ cores - $32$($36$) cores/node
     \item Aries Dragonfly network topology
-    \item $104.7$ TB  memory - $64$ GB/node
+    \item $156.4$ TB memory - $64$($128$) GB/node
    \end{itemize}
 \column{.4\textwidth}
   \includegraphics[width=\columnwidth]{xc30-blade}
@@ -89,7 +89,7 @@
     \item Used for pre/post processing data 
     \item Has large RAM nodes
     \item Has nodes with GPUs
-    \item Lifetime: Q4 2018 
+    \item Lifetime: Q4 2019 
   \end{itemize}
 \end{columns}
 }
@@ -102,11 +102,11 @@
 \begin{table}
   \begin{tabular}{r|l|l}
    & \alert{Beskow} & \alert{Tegner}\\ \hline \hline
-  Cores in each node &	$32$ & $48/24$\\\hline
-  Nodes &	$1.676$ & 50 x  $24$ Haswell/GPU\\
-  &&$10$ x $48$ Ivy bridge\\\hline
-  RAM (GB) & $1.676$ x $64$	& $50$ x $512$GB\\
-  && $5$ x $1024$GB\\
+  Cores in each node &	$32$/$36$ & $48/24$\\\hline
+  Nodes &	$1676$ Haswell & 50 x  $24$ Haswell/GPU\\
+  &	$384$ Broadwell &$10$ x $48$ Ivy bridge\\\hline
+  RAM (GB) & $1676$ x $64$GB	& $50$ x $512$GB\\
+  & $384$ x $128$GB	& $5$ x $1024$GB\\
   && $5$ x $2$TB\\\hline
   Allocations &&\\
   (core hours per month)&&\\
@@ -135,7 +135,7 @@
 \begin{block}{Lustre File System (\alert{Klemming})}
 \begin{itemize}
  \item Open-source massively parallel distributed file system
- \item Very high performance ($5$PB storage - $140$GB/s bandwidth)
+ \item Very high performance ($5$PB storage - $130$GB/s bandwidth)
  \item NO backup (always move data when done) NO personal quota
  \item Home directory \\  \url{/cfs/klemming/nobackup/[initial]/[username]}
 \end{itemize}
