@@ -1,32 +1,32 @@
 \section{Infrastructure}
 
-\subsection*{Overview}
-\frame{
-\frametitle{What is a cluster?}
-\framesubtitle{\includegraphics[height=0.3\textheight,width=\textwidth]{Titan1}}
-
-\begin{columns}[T]
-\column{.4\textwidth}
-  \includegraphics[width=\columnwidth]{TitanIn}
-  \column{.3\textwidth}
-  \begin{itemize}
-    \item Cluster
-    \item Racks
-    \item Blades
-    \item Nodes
-    \item Processors 
-    \item Cores
-  \end{itemize}
-\column{.3\textwidth}
-  \begin{itemize}
-    \item Login nodes
-    \item Compute nodes
-    \item Dedicated nodes
-    \item Transfer nodes
-    \item Service nodes
-  \end{itemize}
-\end{columns}
-}
+%\subsection*{Overview}
+%\frame{
+%\frametitle{What is a cluster?}
+%\framesubtitle{\includegraphics[height=0.3\textheight,width=\textwidth]{Titan1}}
+%
+%\begin{columns}[T]
+%\column{.4\textwidth}
+%  \includegraphics[width=\columnwidth]{TitanIn}
+%  \column{.3\textwidth}
+%  \begin{itemize}
+%    \item Cluster
+%    \item Racks
+%    \item Blades
+%    \item Nodes
+%    \item Processors 
+%    \item Cores
+%  \end{itemize}
+%\column{.3\textwidth}
+%  \begin{itemize}
+%    \item Login nodes
+%    \item Compute nodes
+%    \item Dedicated nodes
+%    \item Transfer nodes
+%    \item Service nodes
+%  \end{itemize}
+%\end{columns}
+%}
 
 
 \subsection{Beskow}
@@ -39,13 +39,13 @@
 \begin{columns}
 \column{.6\textwidth}
   \begin{itemize}
-    \item Lifetime: Q4 2019	
+    \item Lifetime: Q4 2019
     \item $11$ racks, $2060$ nodes
     \item Intel Haswell processor 2.3 GHz \\ Intel Broadwell processor 2.1 GHz
     \item $67,456$ cores - $32$($36$) cores/node
     \item Aries Dragonfly network topology
     \item $156.4$ TB memory - $64$($128$) GB/node
-   \end{itemize}
+  \end{itemize}
 \column{.4\textwidth}
   \includegraphics[width=\columnwidth]{xc30-blade}
   \scriptsize\\
@@ -62,26 +62,29 @@
 \framesubtitle{pre/post processing for Beskow}
 
 \begin{columns}
-\column{.3\textwidth}
+\column{.4\textwidth}
 \scriptsize
   \begin{alertblock}{$5$ x $2$TB Fat nodes}
-    $4$ x $12$ core Ivy Bridge\\
-    $2$TB RAM \\
+    $4$ x $12$ core Ivy Bridge, $2$TB RAM \\
     $2$ x Nvidia Quadro K420
   \end{alertblock}
   
   \begin{alertblock}{$5$ x $1$TB Fat nodes}
-    4x 12 core Ivy Bridge \\
-    $1$TB RAM \\
+    $4$ x $12$ core Ivy Bridge, $1$TB RAM \\
     $2$ x Nvidia Quadro K420
   \end{alertblock}
   
-  \begin{alertblock}{$55$ Thin Nodes}
-    $2$ x $12$ core Haswell \\
-    $512$GB RAM \\
+  \begin{alertblock}{$46$ Thin Nodes}
+    $2$ x $12$ core Haswell, $512$GB RAM \\
     Nvidia Quadro K420 GPU
   \end{alertblock}
-\column{.7\textwidth}
+
+  \begin{alertblock}{$9$ K80 Nodes}
+    $2$ x $12$ core Haswell, $512$GB RAM \\
+    Nvidia Tesla K80 GPU
+  \end{alertblock}
+
+\column{.6\textwidth}
 \normalsize
 \centering\includegraphics[width=.5\columnwidth]{k420}
   
@@ -89,7 +92,8 @@
     \item Used for pre/post processing data 
     \item Has large RAM nodes
     \item Has nodes with GPUs
-    \item Lifetime: Q4 2019 
+    \item Has two transfer nodes
+    \item Lifetime: Q4 2019
   \end{itemize}
 \end{columns}
 }
@@ -102,12 +106,12 @@
 \begin{table}
   \begin{tabular}{r|l|l}
    & \alert{Beskow} & \alert{Tegner}\\ \hline \hline
-  Cores in each node &	$32$/$36$ & $48/24$\\\hline
-  Nodes &	$1676$ Haswell & 50 x  $24$ Haswell/GPU\\
-  &	$384$ Broadwell &$10$ x $48$ Ivy bridge\\\hline
-  RAM (GB) & $1676$ x $64$GB	& $50$ x $512$GB\\
-  & $384$ x $128$GB	& $5$ x $1024$GB\\
-  && $5$ x $2$TB\\\hline
+  Cores in each node &  $32/36$ & $48/24$\\\hline
+  Nodes &  $1676$ Haswell  & 55 x $24$ Haswell/GPU\\
+        &  $384$ Broadwell & 10 x $48$ Ivy bridge\\\hline
+  RAM (GB) & $1676$ x $64$GB & $55$ x $512$GB\\
+           & $384$ x $128$GB & $5$ x $1$TB\\
+           &                 & $5$ x $2$TB\\\hline
   Allocations &&\\
   (core hours per month)&&\\
   Small &	$<5k$&	$<5k$\\

@@ -1,7 +1,7 @@
 \section*{Login and running}
 
 \begin{frame}[fragile]
-  \frametitle{Login and running}
+  \frametitle{Hands-on exercise}
 
 \footnotesize
 \begin{exampleblock}{\large{Login}}
@@ -9,16 +9,15 @@
   \item Some configuration steps are needed to log in to PDC 
   \item Depends on OS: https://www.pdc.kth.se/support/documents/login/login.html
   \item In short, Kerberos and SSH supporting GSSAPI key exchange must be installed 
-  \item Everything is already configured on the lab room Ubuntu machines, \alert{provided you use these custom commands:} \verb|pdc-kinit|, \verb|pdc-klist|, \verb|pdc-ssh|, \verb|pdc-scp|, ...
   \item If needed, you will receive help to connect from your own laptops
-  \item We also have bootable USB sticks with Ubuntu where everything is ready
 \end{itemize}
 \end{exampleblock}
 
-\begin{exampleblock}{\large{Live demo}}
+\begin{exampleblock}{\large{Exercises}}
 \begin{itemize}
-  \item We will now demonstrate some key steps in logging in and running on Beskow
-  \item Remember to replace \verb|kinit|, \verb|ssh| etc. with \verb|pdc-kinit|, \verb|pdc-ssh| etc. if working on KTH-Ubuntu machine
+  \item You will now practice key steps in using PDC resources
+  \item The example source code and batch scripts can be found at \verb|/afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz|,
+    or in the GitHub repository \verb|https://github.com/PDC-support/introduction-to-pdc| (in the intro-course branch)
 \end{itemize}
 \end{exampleblock}
 
@@ -26,273 +25,373 @@
 
 
 %-------------------------------------------------------------------------------------
-\begin{frame}[fragile]
-  \frametitle{SSH}
-  \begin{alertblock}{SSH configuration}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
-kthw@local~$ cat .ssh/config
-# Hosts we want to authenticate to with Kerberos
-Host *.kth.se *.kth.se.
-# User authentication based on GSSAPI is allowed
-GSSAPIAuthentication yes
-# Key exchange based on GSSAPI may be used for server authentication
-GSSAPIKeyExchange yes
-# Hosts to which we want to delegate credentials
-Host *.csc.kth.se *.csc.kth.se. *.nada.kth.se *.nada.kth.se. \
-     *.pdc.kth.se *.pdc.kth.se.
-# Forward (delegate) credentials (tickets) to the server.
-GSSAPIDelegateCredentials yes
-# Prefer GSSAPI key exchange
-PreferredAuthentications gssapi-keyex,gssapi-with-mic
-# All other hosts
-Host *
 
- \end{verbatim}
-\end{alertblock}
+\begin{frame}[fragile]
+  \frametitle{Hands-on exercise}
+
+\footnotesize
+
+\begin{exampleblock}{\large{Exercises}}
+The exercises below will demonstrate:
+\begin{enumerate}
+  \item Kerberos - creating and listing tickets
+  \item Login - via command line or PuTTY, and where you end up on PDC
+  \item AFS home, information on your projects, \verb|/cfs/klemming|
+  \item Working with modules
+  \item Compiling code
+  \item Submitting jobs
+  \item Running interactively
+\end{enumerate}
+\end{exampleblock}
+
+\begin{exampleblock}{\large{Further information}}
+\begin{itemize}
+  \item https://www.pdc.kth.se/support
+  \item https://hpc-carpentry.github.io/hpc-intro/
+  \item https://software-carpentry.org/lessons/
+\end{itemize}
+\end{exampleblock}
 
 \end{frame}
 
+
 %-------------------------------------------------------------------------------------
+
 
 \begin{frame}[fragile]
   \frametitle{Kerberos}
-  \begin{alertblock}{Kerberos configuration}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
+\begin{itemize}
+  \item Two files should be created/edited to enable login to PDC, \verb|krb5.conf| and (linux and mac) \verb|.ssh/config|.
+    For Windows, SSH configuration is done in PuTTY. 
+    Further information here: https://www.pdc.kth.se/support/documents/login/configuration.html
 
-kthw@local~$ cat /etc/krb5.conf
-[domain_realm]
-   .pdc.kth.se = NADA.KTH.SE
-[appdefaults]
-   forwardable = yes
-   forward = yes
-   krb4_get_tickets = no
-[libdefaults]
-   default_realm = NADA.KTH.SE
-   dns_lookup_realm = true
-   dns_lookup_kdc = true
+  \item Assuming that you have now configured Kerberos and SSH, create a forwardable Kerberos ticket
+  \item List the ticket. Can you see if it is forwardable? What does all the jargon mean?
 
- \end{verbatim}
-\end{alertblock}
-
+\end{itemize}
 \end{frame}
-
-
-%-------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
   \frametitle{Kerberos}
-  \begin{alertblock}{Create and list tickets}
+  \begin{exampleblock}{Answer}
     \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item To create a forwardable Kerberos ticket, type:
     \begin{verbatim}
-kthw@local~$ klist
-klist: No credentials cache found
-      
-kthw@local~$ kinit -f kthw@NADA.KTH.SE
-Password for kthw@NADA.KTH.SE:
+      $ kinit -f <username>@NADA.KTH.SE
+    \end{verbatim}
 
-kthw@local~$ klist -Tf  
-Ticket cache: KCM:501
-Default principal: kthw@NADA.KTH.SE
-
-Valid starting       Expires              Service principal
-08/03/2017 16:39:56  08/04/2017 16:39:50  krbtgt/NADA.KTH.SE@NADA.KTH.SE
-   Flags: FIA
-
-  \end{verbatim}
-  \end{alertblock}
-
-\end{frame}
-
-
-%-------------------------------------------------------------------------------------
-
-
-\begin{frame}[fragile]
-  \frametitle{Login}
-  \begin{alertblock}{Log in to Beskow, check ticket}
-    \verbatimfont{\footnotesize}
+  \item To list your Kerberos tickets, type:
     \begin{verbatim}
-
-kthw@local:~$ ssh kthw@beskow.pdc.kth.se
-kthw@beskow-login2:~$ klist -f
-
+      $ klist -f
+    \end{verbatim}
+    The output will hopefully look similar to
+   \begin{verbatim}
 Credentials cache: FILE:/tmp/krb5cc_H26527
     Principal: kthw@NADA.KTH.SE
-
 Issued                Expires             Flags    Principal
 Aug  3 16:41:51 2017  Aug  4 16:39:50 2017  FfA    krbtgt/NADA.KTH.SE@NADA.KTH.SE
 Aug  3 16:41:52 2017  Aug  4 16:39:50 2017  fA     afs/pdc.kth.se@NADA.KTH.SE
-Aug  3 16:41:52 2017  Aug  4 16:39:50 2017  fA     afs@NADA.KTH.SE
-
- \end{verbatim}
-\end{alertblock}
-
-
+   \end{verbatim}
+The first line is your Kerberos ticket, the second line your AFS token.
+\end{itemize}
+\end{exampleblock}
 
 \end{frame}
 
 
+
+
 %-------------------------------------------------------------------------------------
-
-
 \begin{frame}[fragile]
-  \frametitle{Modules}
-  \begin{alertblock}{Inspect module system}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
-
-kthw@beskow-login2:~$ module list
-...
-kthw@beskow-login2:~$ module avail
-...
-kthw@beskow-login2:~$ module avail gcc
-...
-kthw@beskow-login2:~$ CC -V
-Cray C++ : Version 8.3.4  Mon Aug 07, 2017  15:04:06
-kthw@beskow-login2:~$ module swap PrgEnv-cray PrgEnv-gnu
-kthw@beskow-login2:~$ CC --version
-g++ (GCC) 4.9.1 20140716 (Cray Inc.)
-
- \end{verbatim}
-\end{alertblock}
-
-
-
+  \frametitle{Login}
+\begin{itemize}
+  \item Start by logging in to Beskow
+  \item Where are you after login?
+    \begin{itemize}
+      \item What is your current directory?
+      \item What's the name of the login node?
+    \end{itemize}
+  \item Have a look at the currently running processes on the login node
+\end{itemize}
 \end{frame}
 
 
 %-------------------------------------------------------------------------------------
-
 \begin{frame}[fragile]
-  \frametitle{Interactive job on Beskow}
-  \begin{alertblock}{Go to Klemming and start interactive session}
+  \frametitle{Login}
+\begin{exampleblock}{{Answer}}
     \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item On Linux/MacOS, type one of these (use PuTTY on Windows):
     \begin{verbatim}
+    $ ssh username@beskow.pdc.kth.se
+    $ ssh -o GSSAPIDelegateCredentials=yes -o GSSAPIKeyExchange=yes 
+      -o GSSAPIAuthentication=yes username@beskow.pdc.kth.se
+    \end{verbatim}
 
-kthw@beskow-login2:~$ cd /cfs/klemming/nobackup/k/kthw/
+    \item After logging in, \verb|pwd| shows your current directory:
+    \begin{verbatim}
+    $ pwd
+    /afs/pdc.kth.se/home/u/username
+    \end{verbatim}
 
-# (command line shortened below here)
-$ mkdir my_job
-$ cd my_job
-$ salloc -A summer-2017 --reservation=summer-2017-08-15 -N 1 -t 0:10:0
-salloc: Granted job allocation 1733496
+    \item The \verb|hostname| command shows the hostname of the login node:
+    \begin{verbatim}
+    $ hostname
+    beskow-login2.pdc.kth.se
+    \end{verbatim}
 
-$ hostname
-beskow-login2.pdc.kth.se
+    \item The \verb|top| command shows a snapshot of currently running processes:
+    \begin{verbatim}
+      $ top
+    \end{verbatim}
 
-$ aprun -n 1 hostname
-nid01610
+    \item Note that the login node is a shared resource!
+    \end{itemize}
 
-$ exit
-salloc: Relinquishing job allocation 1733497
-salloc: Job allocation 1733497 has been revoked.
-
- \end{verbatim}
-\end{alertblock}
-
-
-
+\end{exampleblock}
 \end{frame}
 
 
 %-------------------------------------------------------------------------------------
-
 \begin{frame}[fragile]
-  \frametitle{Interactive job on Tegner}
-  \begin{alertblock}{Go to Klemming and start interactive session}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
-
-kthw@tegner-login-1:~$ cd /cfs/klemming/nobackup/k/kthw/
-
-# (command line shortened below here)
-$ mkdir my_job
-$ cd my_job
-$ salloc -A summer-2017 -N 1 -t 0:10:0
-salloc: job 666061 has been allocated resources
-salloc: Waiting for resource configuration
-salloc: Nodes t03n03 are ready for job
-
-# either run on allocated node using srun/mpirun, or by logging into node
-$ srun -n 1 hostname
-t03n03.pdc.kth.se
-# to log in to node, must open new terminal:
-local-machine $ ssh kthw@t03n03.pdc.kth.se
-t03n03 $ mpirun -np 24 my_code.x
-
- \end{verbatim}
-\end{alertblock}
-
-
-
+  \frametitle{AFS home, listing projects, /cfs/klemming}
+\begin{itemize}
+  \item Check your AFS disk quota (hint: you will need the \verb|fs| command, type \verb|fs help| to see available subcommands)
+  \item Go to your klemming nobackup directory. Can you run \verb|fs| there?
+  \item Check which allocation(s) you belong to using the \verb|projinfo| command
+    \begin{itemize}
+      \item Check all options of \verb|projinfo| using the \verb|-h| flag
+      \item How much have your allocations been used, and for how long are they valid?
+    \end{itemize}
+\end{itemize}
 \end{frame}
 
 
 %-------------------------------------------------------------------------------------
-
 \begin{frame}[fragile]
-  \frametitle{Batch job}
-  \begin{alertblock}{Compile code and write batch script}
+  \frametitle{AFS home, listing projects, /cfs/klemming}
+\begin{exampleblock}{{Answer}}
     \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item The \verb|fs lq| command shows the name of the AFS volume of your home directory, your disk quota and usage:
     \begin{verbatim}
+    $ fs lq
+    \end{verbatim}
 
-$ cp ~/Public/hello_world.f90 .
-$ ftn -o hello_world.x hello_world.f90
+    \item \verb|fs lq| only works on AFS. You can type \verb|df -h .| instead, but there's no quota on your klemming usage:
+    \begin{verbatim}
+    $ df -h .
+    Filesystem     Size  Used Avail Use% Mounted on
+    ...:/klemming  5.2P  4.4P  730T  86% /cfs/klemming
+    \end{verbatim}
 
-$ cat <<EOF > submit.bash
-#!/bin/bash -l
+    \item The \verb|projinfo| command accesses a database that contains logs of all allocations 
+    \begin{verbatim}
+    $ projinfo
+    \end{verbatim}
 
-#SBATCH -A summer-2017
-#SBATCH -J myjob
-#SBATCH -t 0:10:00
-#SBATCH -N 1
-#SBATCH --reservation=summer-2017-08-15
-#SBATCH -e error_file.e
-#SBATCH -o output_file.o
+    \end{itemize}
 
-aprun -n 32 ./hello_world.x > my_output_file 2>&1
-
-EOF
-
- \end{verbatim}
-\end{alertblock}
-
-
+\end{exampleblock}
 \end{frame}
 
 
-%-------------------------------------------------------------------------------------
 
+
+%-------------------------------------------------------------------------------------
 \begin{frame}[fragile]
-  \frametitle{Batch job}
-  \begin{alertblock}{Submit and monitor job}
-    \verbatimfont{\footnotesize}
-    \begin{verbatim}
-
-$ sbatch submit.bash
-$ squeue -u kthw
-JOBID USER ACCOUNT NAME  ST REASON START_TIME TIME TIME_LEFT NODES CPUS
-1735211 kthw pdc.sta myjob R None 2017-08-07T16:31:01 0:00 10:00 1 64
-
-$ cat my_output_file
- Hello from rank           31  of           32
- Hello from rank           13  of           32
- Hello from rank           26  of           32
- Hello from rank           10  of           32
- Hello from rank           17  of           32
- Hello from rank           14  of           32
- Hello from rank            1  of           32
-...
-
-
- \end{verbatim}
-\end{alertblock}
-
-
+  \frametitle{Working with modules}
+\begin{itemize}
+  \item List the modules that are currently loaded (hint: type \verb|module help|)
+  \item List all the modules that are available on Beskow
+  \item List all available modules named \verb|PrgEnv|
+  \item Swap from the \verb|PrgEnv-cray| to the \verb|PrgEnv-gnu| module
+\end{itemize}
 \end{frame}
 
 
 %-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Working with  modules}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item Listing all loaded modules and all available modules is done like this:
+    \begin{verbatim}
+      $ module list
+      $ module avail
+    \end{verbatim}
 
+    \item To list all modules matching a pattern (like PrgEnv), type
+    \begin{verbatim}
+      $ module avail PrgEnv
+    \end{verbatim}
+
+    \item To swap programming environments (i.e. compiler environments), type
+    \begin{verbatim}
+      $ module swap PrgEnv-cray PrgEnv-gnu
+    \end{verbatim}
+    After swapping these modules, the compiler wrappers \verb|CC, cc| and \verb|ftn| point to the GNU compilers (instead of the 
+    Cray compilers)
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Compiling code}
+\begin{itemize}
+  \item Copy the tarball \verb|/afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz| to  
+    your nobackup directory, and unpack it
+  \item Now compile the MPI example code \verb|hello_world_mpi.c|
+    \begin{itemize}
+      \item Do you need to load any MPI libraries?
+      \item What compiler will be used when using the \verb|cc| compiler wrapper?
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Compiling code}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item Copying and extracting the tarball to your klemming directory:
+    \begin{verbatim}
+      $ cd /cfs/klemming/nobackup/u/username # replace this!
+      $ cp /afs/pdc.kth.se/home/k/kthw/Public/pdc_test.tar.gz .
+      $ tar zxf pdc_test.tar.gz
+      $ cd pdc_test
+    \end{verbatim}
+
+    \item When using the compiler wrappers CC, cc and ftn, no MPI or numerical libraries need to be loaded 
+      or linked to explicitly!
+    \begin{verbatim}
+      $ cc -o hello_world_mpi hello_world_mpi.c
+    \end{verbatim}
+    \item Which compiler did we just compile with?
+    \begin{verbatim}
+      $ cc --version
+      gcc (GCC) 4.9.1 20140716 (Cray Inc.)
+    \end{verbatim}
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Submitting jobs}
+\begin{itemize}
+  \item Open the batch script \verb|sbatch_beskow.sh| in your favorite editor (emacs or vim)
+    \begin{itemize}
+      \item Set the allocation ID to \verb|edu18.intropdc|
+      \item Set that the job should run on two nodes, with 16 processes running on each node
+      \item Set the requested time of the job to 2 minutes
+    \end{itemize}
+  \item Submit the job to the SLURM queue!
+  \item Monitor the queue to see if your job is running
+  \item What output did you get?
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Submitting jobs}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item The allocation, number of nodes and time are set with these flags
+    \begin{verbatim}
+      #SBATCH -A edu18.intropdc
+      #SBATCH -t 0:02:00
+      #SBATCH --nodes=2
+    \end{verbatim}
+    \item If you want to run 32 MPI processes in total, with 16 processes on each node, both the \verb|-n| and \verb|-N| flags 
+      to \verb|aprun| must be used:
+    \begin{verbatim}
+      aprun -n 32 -N 16 ./hello_world_mpi
+    \end{verbatim}
+    \item The job is submitted and monitored like this:
+    \begin{verbatim}
+      $ sbatch sbatch_beskow.sh
+      $ squeue -u <username>
+    \end{verbatim}
+    \item The output gets written to a default filename:
+    \begin{verbatim}
+      $ cat slurm-2559495.out
+      Hello world from rank 0 out of 32 process
+      Hello world from rank 4 out of 32 process
+      ...
+    \end{verbatim}
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Running interactively}
+\begin{itemize}
+  \item For this example, use the OpenMP code \verb|hello_world_openmp.c|.
+    \begin{itemize}
+      \item First compile it. Does it work to compile with \verb|cc -o hello_world_openmp hello_world_openmp.c|?
+      \item Spoiler: it won't work, since you need to add an OpenMP compiler flag. Have a look in
+        the Makefile to find the flag
+    \end{itemize}
+  \item Now allocate an interactive node. Hint: you need to specify allocation, number of nodes and time.
+  \item Run the compiled \verb|hello_world_openmp| on the interactive node. Important: don't forget to use \verb|aprun|
+  \item How many OpenMP threads do you see? How do you set the number of threads?
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+  \frametitle{Running interactively}
+\begin{exampleblock}{{Answer}}
+    \verbatimfont{\footnotesize}
+    \begin{itemize}
+    \item To compile the code with OpenMP support, do:
+    \begin{verbatim}
+      $ cc -fopenmp -o hello_world_openmp hello_world_openmp.c
+    \end{verbatim}
+
+    \item To allocate an interactive node for 10 minutes:
+    \begin{verbatim}
+      $ salloc -A edu18.intropdc -t 0:05:0 -N 1
+    \end{verbatim}
+
+    \item To run the code using 32 threads, first set this environment variable and then run with \verb|aprun|
+    \begin{verbatim}
+      $ export OMP_NUM_THREADS=32
+      $ aprun -n 1 -d 32 ./hello_world_openmp  
+      # the -d (depth) isn't actually needed here
+    \end{verbatim}
+    NOTE: \verb|aprun| sends the job to the interactive compute node. Omitting \verb|aprun| means the calculation will run 
+    on the login node.
+
+    \end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+
+
+
+
+%-------------------------------------------------------------------------------------
+
+
+\frame{\huge\centering Questions...?}

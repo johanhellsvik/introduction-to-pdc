@@ -1,7 +1,13 @@
 \documentclass[xcolor=table]{beamer}
+%\documentclass[handouts]{beamer}
+%\setbeameroption{show notes}
 \setbeameroption{hide notes}
+%\setbeameroption{show only notes}
 
+
+%[xetex,mathserif,serif]
 \usepackage{multicol}
+%\usepackage{animate}
 \usepackage{verbatim}
 \makeatletter
 \newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
@@ -25,13 +31,16 @@
 \definecolor{kthGreen}{RGB}{98,146,46} %Gorn
 \definecolor{kthLightGreen}{RGB}{176,201,43} %Ljusgron
 
+
 \usetheme{AnnArbor}
 
+% \setbeamercolor{background canvas}{bg=white}
 \setbeamercolor*{structure}{fg=kthLightBlue,bg=kthBlue}
 \setbeamercolor*{palette primary}{use=structure,fg=white,bg=kthBlue} 
 \setbeamercolor*{palette secondary}{use=structure,fg=black,bg=kthLightGrey}
 \setbeamercolor*{palette tertiary}{use=structure,fg=black,bg=kthLightBlue}
 %\setbeamercolor*{palette quaternary}{use=structure,fg=black,bg=kthLightGrey}
+
 
 \setbeamercolor*{frametitle}{fg=kthBlue,bg=kthLightGrey}
 \setbeamercolor*{alerted text}{fg=kthRed}
@@ -39,6 +48,7 @@
 %\setbeamercolor{palette sidebar primary}{use=structure,fg=structure.fg,bg=red}
 %\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg,bg=green}
 %\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+
 
 \setbeamercolor{block title}{bg=kthMediumGrey}
 \setbeamercolor{block body}{bg=normal text.bg!90!black}
@@ -60,20 +70,35 @@
 \setbeamercolor{title}{fg=white,bg=kthBlue}
 %\setbeamercolor{titlelike}{fg=DarkGreen}
 
+
+%\setbeamercolor{sidebar}{bg=red}
+%\setbeamercolor{sidebar}{parent=palette primary}
+%\setbeamercolor{palette sidebar primary}{fg=red}%use=normal text,fg=normal text.fg}
+%\setbeamercolor{palette sidebar quaternary}{fg=red}
+%\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg}
+%\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+
+
+
 \title{Introduction to PDC environment}
 \subtitle{}
 
+%\author{Thor Wikfeldt}
 \author{Xin Li}
 
 \institute[PDC]{
   PDC Center for High Performance Computing\\
   KTH Royal Institute of Technology
+  }
+  \logo{
+   \includegraphics[width=1cm,keepaspectratio]{logo_kth_transparent}~%
+   % \includegraphics[width=1cm,height=1cm,keepaspectratio]{logo_kth+pdc_blue}~%
+ 
 }
-\logo{
- \includegraphics[width=1cm,keepaspectratio]{logo_kth_transparent}~%
-}
+%\date[PDC Oct 2017]{Introduction to PDC, February 2018}
 \date[PDC Aug 2018]{PDC Summer School August 2018}
 \subject{Introduction}
+
 
 \begin{document}
 \frame{\titlepage}
@@ -85,6 +110,13 @@
     \tableofcontents[currentsection]
   \end{frame}
 }
+%\AtBeginSubsection[]
+%{
+ % \begin{frame}
+  %  \frametitle{Table of Contents}
+   % \tableofcontents[currentsection,currentsubsection]
+ % \end{frame}
+%}
 
 %\frame[plain]{
 %Large image inclusion 
@@ -98,7 +130,6 @@
 %\color{kthLightGreen}{kthLightGreen}\\
 %\color{kthMediumGrey}{kthMediumGrey}
 %}
-
 %\frame[shrink]{
 %%\begin{block}{Answered Questions}
 %How many primes are there?
@@ -110,6 +141,8 @@
 %\frame[allowframebreaks]{
 %The allowframebreaks option will auto-create new frames if there is too much content to be displayed on one.
 %}
+
+
 
 \newcommand\irregularcircle[2]{% radius, irregularity
   \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
@@ -127,6 +160,7 @@
 \include{jobs}
 \include{conclusion}
 \include{live_demo}
-\include{unix_shell}
 
 \end{document}
+
+

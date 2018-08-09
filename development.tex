@@ -5,73 +5,14 @@
 \framesubtitle{on HPC clusters}
  \begin{description}
     \item [source code] C / C++ / Fortran ( \verb|.c, .cpp, .f90, .h|  )
-    \item [compile] Cray/Intel/GNU compilers\\ include headers, expand macros (\verb|.i,.ii| )
-    \item [assemble] into machine code (\verb|.o, .obj| )
+    \item [compile] Cray/Intel/GNU compilers
+    \item [assemble] into machine code (object files: \verb|.o, .obj| )
     \item [link] Static Libraries (\verb|.lib, .a|  ) \\ Shared Library (\verb|.dll, .so| ) \\ Executables (\verb|.exe, .x| )
     \item ~ 
     \item [request allocation] submit job request to SLURM queuing system \\ \verb|salloc/sbatch|
     \item [run] application on scheduled resources \\ \verb|aprun/mpirun|
  \end{description}
 \end{frame}
-
-\subsection{Compilers}
-\begin{frame}[fragile]
-\frametitle{Compiling serial and/or parallel code}
-\framesubtitle{specific to \alert{Tegner}}
-
-\begin{columns}[t]
-\column{.45\textwidth}
-\begin{exampleblock}{GNU Compiler Collection (\textbf{gcc})}
-  \scriptsize
-  \begin{verbatim}
-$ module load 	gcc openmpi
-$ gcc	   -fopenmp source.c
-$ g++	   -fopenmp source.cpp
-$ gfortran -fopenmp source.F90
-$ mpicc	   -fopenmp source.c
-$ mpicxx   -fopenmp source.cpp
-$ mpif90   -fopenmp source.F90
-  \end{verbatim}
-  \end{exampleblock}
-
-  \begin{exampleblock}{Portland Group Compilers (\textbf{pgi}) }
-  \scriptsize
-  \begin{verbatim}
-$ module load 	pgi
-$ pgcc  -mp source.c
-$ pgcpp -mp source.cpp
-$ pgf90 -mp source.F90
-  \end{verbatim}
-  \end{exampleblock}
-
-\column{.45\textwidth}
-
-  \begin{exampleblock}{Intel compilers (\textbf{i-compilers})}
-  \scriptsize
-  \begin{verbatim}
-  $ module load i-compilers
-  $ icc   -openmp source.c	
-  $ icpc  -openmp source.cpp
-  $ ifort -openmp source.F90
-  $ module add i-compilers intelmpi
-  $ mpiicc 	-openmp source.c
-  $ mpiicpcp 	-openmp source.cpp
-  $ mpiifort 	-openmp source.F90
-  \end{verbatim}
-  \end{exampleblock}
-
-  \begin{exampleblock}{CUDA compilers (\textbf{cuda})}
-  \scriptsize
-  \begin{verbatim}
-  $ module load cuda
-  $ nvcc source.cu
-  $ nvcc -arch=sm_37  source.cu
-  \end{verbatim}
-  \end{exampleblock}
-
-\end{columns}
-\end{frame}
-
 
 \subsection{Modules}
 \begin{frame}[fragile]
@@ -167,3 +108,64 @@ $ ftn	source.F90
     Sometimes you need to edit Makefiles which are not designed for Cray 
 \end{exampleblock}
 \end{frame}
+
+
+\subsection{Compilers}
+\begin{frame}[fragile]
+\frametitle{Compiling serial and/or parallel code}
+\framesubtitle{specific to \alert{Tegner}}
+
+\begin{columns}[t]
+\column{.45\textwidth}
+\begin{exampleblock}{GNU Compiler Collection (\textbf{gcc})}
+  \scriptsize
+  \begin{verbatim}
+$ module load 	gcc openmpi
+$ gcc	   -fopenmp source.c
+$ g++	   -fopenmp source.cpp
+$ gfortran -fopenmp source.F90
+$ mpicc	   -fopenmp source.c
+$ mpicxx   -fopenmp source.cpp
+$ mpif90   -fopenmp source.F90
+  \end{verbatim}
+  \end{exampleblock}
+
+  \begin{exampleblock}{Portland Group Compilers (\textbf{pgi}) }
+  \scriptsize
+  \begin{verbatim}
+$ module load 	pgi
+$ pgcc  -mp source.c
+$ pgcpp -mp source.cpp
+$ pgf90 -mp source.F90
+  \end{verbatim}
+  \end{exampleblock}
+
+\column{.45\textwidth}
+
+  \begin{exampleblock}{Intel compilers (\textbf{i-compilers})}
+  \scriptsize
+  \begin{verbatim}
+  $ module load i-compilers
+  $ icc   -openmp source.c	
+  $ icpc  -openmp source.cpp
+  $ ifort -openmp source.F90
+  $ module add i-compilers intelmpi
+  $ mpiicc 	-openmp source.c
+  $ mpiicpcp 	-openmp source.cpp
+  $ mpiifort 	-openmp source.F90
+  \end{verbatim}
+  \end{exampleblock}
+
+  \begin{exampleblock}{CUDA compilers (\textbf{cuda})}
+  \scriptsize
+  \begin{verbatim}
+  $ module load cuda
+  $ nvcc source.cu
+  $ nvcc -arch=sm_37  source.cu
+  \end{verbatim}
+  \end{exampleblock}
+
+\end{columns}
+\end{frame}
+
+
