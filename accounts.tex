@@ -174,3 +174,32 @@ $ ssh username@clustername.pdc.kth.se
 \alert{Always create a kerberos ticket on your local system}
 \alert{https://www.pdc.kth.se/support/documents/login/login.html}
 \end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{File transfer}
+
+\begin{description}
+\item [Scp/Rsync:] copy files between hosts on a network
+\item [AFS client:] drag-and-drop or use a cp command
+\end{description}
+
+\begin{alertblock}{Using scp}
+\begin{itemize}
+  \item scp localFile user@t04n28.pdc.kth.se:/afs/pdc.kth.se/home/u/user
+  \item scp -r localDir user@t04n28.pdc.kth.se:/afs/pdc.kth.se/home/u/user
+  \item scp user@t04n28.pdc.kth.se:/cfs/klemming/scratch/u/user/pdcFile .
+\end{itemize}
+\end{alertblock}
+
+\begin{alertblock}{Using AFS client}
+\begin{itemize}
+  \item AFS client can be installed on Linux, Windows, and MacOS
+  \item Linux: start with "sudo /etc/init.d/openafs-client start"
+  \item MacOS: start with "aklog"
+\end{itemize}
+\end{alertblock}
+
+\alert{Note: You cannot access /cfs/klemming files via AFS client.}
+
+\end{frame}
