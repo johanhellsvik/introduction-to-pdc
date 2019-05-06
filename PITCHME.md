@@ -26,9 +26,11 @@
 
 ---
 
-## SNIC Centra
+snap[north-west]
+*SNIC Centra*
+@snapend
 
-@snap[east]
+@snap[south-west size40 border-image span-50]
 The Swedish National Infrastructure for Computing (SNIC) is a
 national research infrastructure that provides a balanced and
 cost-efficient set of resources and user support for large scale
@@ -37,7 +39,7 @@ scientific disciplines and from all over Sweden (universities, university
 colleges, research institutes, etc). The resources are made available
 through open application procedures such that the best Swedish research is supported.
 @snapend
-@snap[west]
+@snap[south-east size40 border-image align-left span-50]
 ![](img/sweden.png)
 @snapend
 
@@ -68,7 +70,7 @@ PDC-HPC application experts hold PhD degrees in different scientific fields and 
 Together with researchers, they optimize, scale and enhance scientific codes for the next generation
 supercomputers.
 
-@snap[east]
+@snap[east snap-33]
 ![](img/thor_wikfeldt.png)
 
 Molecular Dynamics
@@ -76,23 +78,23 @@ Molecular Dynamics
 ![](img/henric_zazzi.png)
 
 Bioinformatics/Molecular biology
-@snap[west]
+@snap[west snap-33]
 ![](img/jing_gong.png)
 
 Computational Fluid Dynamics
 @snapend
-@snap[southeast]
+@snap[south-east snap-33]
 ![](img/xin_li.png)
 
 Multiscale Modelling
 @snapend
-@snap[south]
+@snap[south snap-33]
 ![](img/tor_kjellsson.png)
 
 Code Optimization
 @snapend
-@snap[soutwest]
-![](img/Xavier Aguilar.png)
+@snap[south-west snap-33]
+![](img/xavier_guilar.png)
 
 Machine Learning/Performance Analysis
 @snapend
@@ -122,6 +124,8 @@ Machine Learning/Performance Analysis
 - Partially reserved for PRACE, SCANIA, INCF
 - Lifetime: Q4 2020
   
+---  
+  
 ## Tegner
 
 - Intended for Beskow pre/post processing
@@ -132,34 +136,11 @@ Machine Learning/Performance Analysis
 - Runs the SLURM queue system
 - Lifetime: Q4 2020  
 
+---
+
 ## Summary of PDC resources
 
- +------------------------------------+--------------------+--------------------------+
- | Computer                           | Beskow             | Tegner                   |
- +====================================+====================+==========================+
- | Core/node                          | 32/36              | 48/24                    |
- +------------------------------------+--------------------+--------------------------+
- | Nodes                              | 2060               | | **50**: 24 Haswell/GPU |
- |                                    |                    | | **10**: 48 Ivy bridge  |
- +------------------------------------+--------------------+--------------------------+
- | RAM (Gb)                           | 64                 | | **50**: 512            |
- |                                    |                    | | **5**: 1000            |
- |                                    |                    | | **5**: 2000            | 
- +------------------------------------+--------------------+--------------------------+
- | Small allocations                  |                    | 5000                     |
- +------------------------------------+--------------------+--------------------------+
- | Medium allocations                 | 200000             | 50000                    |
- +------------------------------------+--------------------+--------------------------+
- | Large allocations                  | >200000            |                          |
- +------------------------------------+--------------------+--------------------------+
- | Allocations via SNIC               | yes                | no                       |
- +------------------------------------+--------------------+--------------------------+
- | Lifetime                           | Q4 2020            | Q4 2020                  |
- +------------------------------------+--------------------+--------------------------+
- | AFS                                | login node only    | yes                      |
- +------------------------------------+--------------------+--------------------------+
- | Lustre                             | yes                | yes                      |
- +------------------------------------+--------------------+--------------------------+
+@table[](clusters.csv)
 
 ---
 
@@ -204,28 +185,22 @@ PDC uses kerberos together with **SSH** for login
 - Users use password to obtain tickets
 - Tickets are cached on users computer for a specified duration
 - @color[red](Tickets should be created on your local computer)
-- As long as tickets are valid there is no need to enter password
+- No need to enter password as long as tickets are valid
 
 ---
 
-@color[green](Realm)
-- all resources available to access
-- example: NADA.KTH.SE
-  
-@color[green](Principal)
-- Unique identity to which kerberos can assign tickets. 
-- example: <username>@NADA.KTH.SE
+- @color[green](Realm)
+  - all resources available to access
+  - example: NADA.KTH.SE
+- @color[green](Principal)
+  - Unique identity to which kerberos can assign tickets. 
+  - example: <username>@NADA.KTH.SE
 
 ---
 
 ## Kerberos commands
 
-Command | Scope
---- | ---
-kinit | proves your identity
-klist |list your kerberos tickets
-kdestroy | destroy your kerberos ticket file
-kpasswd | change your kerberos password
+@table[table-header](kerberos.csv)
 
 ```
 $ kinit -f <username>@NADA.KTH.SE
@@ -250,10 +225,9 @@ Mar 25 09:45 Mar 25 19:45 FA afs/pdc.kth.se@NADA.KTH.SE
    ```
    $ ssh <username>@<cluster>.pdc.kth.se
    ```
-3. Replace cluster...
    beskow login node: beskow.pdc.kth.se
-
 4. You will have reached the cluster
+
    @color[red](Always create a kerberos ticket on your local system)
 
 ---
@@ -267,8 +241,8 @@ Mar 25 09:45 Mar 25 19:45 FA afs/pdc.kth.se@NADA.KTH.SE
   - Windows *Network Identity Manager, PuTTY*
   - Mac
   - KTH Computers
-- Follow the instructions for your operating system
-  https://www.pdc.kth.se/support/documents/login/login.html
+  
+https://www.pdc.kth.se/support/documents/login/login.html
 
 ---
 
@@ -283,9 +257,9 @@ $ pdc-kinit -f -l 7d <username>@NADA.KTH.SE
 # Login into cluster  
 $ pdc-ssh <cluster>.pdc.kth.se
 ```
-
-More information at
-https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
+@snap[south snap-80]
+More information at https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
+@snapend
 
 ---
 
@@ -295,11 +269,11 @@ https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
 
 ## File systems at PDC
 
-- AFS (Andrew File System)
+- AFS *Andrew File System*
   - distributed
   - global
   - backup
-- Lustre (Linux cluster file system)
+- Lustre *Linux cluster file system*
   - distributed
   - high-performance
   - no backup
@@ -341,7 +315,7 @@ https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
   /cfs/klemming
   ```
 - UNIX permissions
-- No personal quota. :red:`Move your data when finished`
+- No personal quota. @color[red](Move your data when finished)
 - Not global
 
 ---
@@ -382,9 +356,6 @@ $ scp myfile <username>@beskow.pdc.kth.se:~/Private
 # from Beskow Lustre to my laptop
 $ scp <username>@beskow.pdc.kth.se:/cfs/klemming/scratch/<u>/<username>/file.txt .
 ```
-  
-*If the username is the same on source and destination machine, you can
-leave it out*
 
 For large files use the transfer nodes on Tegner
 
@@ -437,13 +408,7 @@ module-whatis	 FFTW 3.3.4.0 - Fastest Fourier Transform in the West
 
 ## Module commands
 
-Command | Scope
---- | ---
-module add *software[/version]* | loads *software[/version]*
-module avail | Lists available softwares
-module show *software* | shows information about *software*
-module list | Lists currently loaded softwares
-module swap *frommodule* *tomodule* | swaps *frommodule* to *tomodule*
+@table[table-header](module.csv)
 
 ---
 
@@ -463,8 +428,8 @@ https://www.pdc.kth.se/software
 
 ## SLURM queue system
 
-1. Allocates exclusive and/or non-exclusive access to resources (computer nodes) to users for some duration of time so they can perform work.
-2. Provides a framework for starting, executing, and monitoring work (typically a parallel job) on a set of allocated nodes.
+1. Allocates exclusive access to resources (computer nodes) to users for some duration of time.
+2. Provides a framework for starting, executing, and monitoring work on a set of allocated nodes.
 3. Arbitrates contention for resources by managing a queue of pending work
 4. Installed on Beskow, Tegner
 5. Installed by default, no need to load module
@@ -473,7 +438,7 @@ https://www.pdc.kth.se/software
 
 ## Which time allocation am I a member of
 
-Projinfo::
+Projinfo
 
 ```
 $ projinfo -h
@@ -527,8 +492,7 @@ Allocation
 
 ## Requesting a specific type of node
 
-It is also possible in SLURM to request a specific type of node, 
-e.g. if there is a mix of large or small memory nodes e.g.
+It is also possible in SLURM to request a specific type of node
 ```
 # Request a node with at least 1 TB RAM
 salloc -t 1:00:00  -A <allocation> -N 1 --mem=1000000
@@ -587,14 +551,13 @@ mpirun -n 48 ./hello_mpi
 
 ## Compilers and libraries on Beskow
 
-- PrgEnv module
-  - PrgEnv-cray, PrgEnv-Intel (Intel), PrgEnv-gnu (GNU)
+- PrgEnv-cray, PrgEnv-Intel (Intel), PrgEnv-gnu (GNU)
   - By default **PrgEnv-cray** is loaded
   - Swap it by using command...
     ```
     $ module swap PrgEnv-cray PrgEnv-other
     ```
-- Always use the wrappers
+- Always use the wrappers for compiling
 
   - cc (C code), CC (C++), ftn (FORTRAN)
       
@@ -606,6 +569,8 @@ mpirun -n 48 ./hello_mpi
   ```
   - Other libraries are lapack, blas scalapack, blacs,...
   -  https://www.pdc.kth.se/software/#libraries
+
+---
 
 ## Using compiler wrappers on Beskow (serial and MPI)
 
@@ -620,7 +585,7 @@ CC [flags] source.cpp
 
 ---
 
-## Comping OpenMP code on a Beskow
+## Compiling OpenMP code on a Beskow
 
 ```
 # Intel
@@ -682,10 +647,8 @@ $ mpiicpc  -openmp -o hello_mpi hello_mpi.cpp
 
 - A lot of question can be answered via our web
   http://www.pdc.kth.se/support
-
 -  The best way to contact us is via e-mail
    https://www.pdc.kth.se/support/documents/contact/contact_support.html
-
 - The support request will be tracked
 - Use a descriptive subject in your email
 - Give your PDC user name.
@@ -694,624 +657,5 @@ $ mpiicpc  -openmp -o hello_mpi hello_mpi.cpp
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Overview
-
-- What are containers
-- Docker, the most popular container
-- Singularity: Containers for the HPC environment
-- installation of singularity
-- Using the container
-- How to build containers
-- Running your container in an HPC environment
-- Creating recipes for singularity
-
----
-
-## What are containers
-
-![borderless](img/container.png)
----
-
-@snap[north-west]
-A container image is a lightweight, standalone, executable package of
-software that includes everything needed to run an application.
-@snapend
-
-@snap[south-west size40 border-image]
-Virtual Machine<br>
-![](img/container-vm-whatcontainer.png)
-@snapend
-
-@snap[south-east size40 border-image align-left]
-Container<br>
-![](img/container-what-is-container.png)
-@snapend
-
----
-
-## Containers: How are they useful
-
-- Reproducibility
-- Portability
-- Depending on application and use-case, simple extreme scalability
-- Next logical progession from virtual machines
-
----
-
-## Why do we want containers in HPC?
-
-- Escape “dependency hell”
-- Load fewer modules
-- Local and remote code works identically every time
-- One file contains everything and can be moved anywhere
-
----
-
-## Docker, the most popular container
-
-![](img/docker.png)
-
----
-
-## The Docker container software
-
-- The most know and utilized container software
-- Facilites workflow for creating, maintaining and distributing software
-- Easy to install, well documented, standardized
-- Used by many scientist
-
----
-
-## Docker on HPC: The problem
-
-- Incompabilities with scheduling managers (SLURM...)
-- No support for MPI
-- No native GPU support
-- Docker users can escalate to root access on the cluster
-- @color[red](Not allowed on HPC clusters)
-
----
-
-## Singularity: Containers for the HPC environment
-
-- Package software and dependencies in one file
-- Use same container in different SNIC clusters
-- Limits user’s	privileges,	better security
-- Same user inside container as on host
-- No need for most modules
-- **Negligable performance decrease**
-
----
-
-## But I want to keep using docker
-
-- Works great for local and private resources.
-- No HPC centra will install docker for you
-- **Singularity can import Docker images**
-
----
-
-## Singularity hub
-
-https://singularity-hub.org/
-@snap[with-border]
-![](img/hub.png)
-@snapend
-
----
-
-## Singularity Versions
-
-- Latest version: 3.0.0 (2018-10-08)
-- Installed on Tegner: 2.5.1
-- Installed on VM: 2.5.2
-
----
-
-@snap[north-west]
-<h2>Singularity workflow</h2>
-@snapend
-
-@snap[west with-border]
-**Local computer**<br>
-**(ROOT)**<br>
-Create container<br>
-@css[lightgreen](singularity build)<br>
-Install software<br>
-Install libraries<br>
-@snapend
-
-@snap[kthblue]
-@fa[arrow-right fa-4x]
-@snapend
-
-@snap[east align-left with-border]
-**HPC cluster**<br>
-**(USER)**<br>
-@css[lightgreen](singularity shell)<br>
-@css[lightgreen](singularity exec)<br>
-@css[lightgreen](singularity help)<br>
-@css[lightgreen](singularity run)<br>
-@snapend
-
----
-
-## Install singularity in Linux
-
-```
-$ VERSION=2.5.2
-$ sudo apt-get update
-$ sudo apt-get install libarchive-dev
-$ sudo apt-get install squashfs-tools
-# Get and install
-$ wget github.com/sylabs/singularity/releases/
-download/$VERSION/singularity-$VERSION.tar.gz
-$ tar xvf singularity-$VERSION.tar.gz
-$ cd singularity-$VERSION
-$ ./configure --prefix=/usr/local
-$ make
-$ sudo make install
-```
-
-For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user-guide/installation.html
-
----
-
-## Launching a container
-
-- Singularity sets up the container environment and creates the necessary
-  namespaces.
-- Directories, files and other resources are shared from the host into the
-  container.
-- All expected I/O is passed through the container: pipes, program arguments,
-  std, X11
-- When the application(s) finish their foreground execution process, the
-  container and namespaces collapse and vanish cleanly
-
----
-
-## Using the container
-
----
-
-## Download and test an image
-
-Download and test the latest UBUNTU image from docker hub
-
-```
-$ sudo singularity build my_image.simg docker://ubuntu:latest
-Docker image path: index.docker.io/library/ubuntu:latest
-Cache folder set to /root/.singularity/docker
-Importing: base Singularity environment
-Building Singularity image...
-Singularity container built: my_image.simg
-$ singularity shell my_image.simg
-Singularity: Invoking an interactive shell within container...
-Singularity my_image.simg:~> cat /etc/*-release
-
-```
-
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
-
----
-
-## @color[red](Exercise 1: Download a container)
-
-@ol[](false)
-- Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
-- build the container using singularity
-  (shub://[full name of container])
-- Use the container shell and get acquainted with it 
-@olend
-
----
-
-## How to build containers
-
----
-
-## Why must I be root?
-
-Same permissions in the container as outside...
-
-To be root in the singularity image you must be root on the computer
-
----
-
-## Build a writeable image
-
-Since there are memory limitation on writing directly to image file,
-it is better to create a sandbox
-
-```
-$ sudo singularity build --sandbox my_sandbox my_image.simg
-Building from local image: my_image.simg
-Singularity container built: my_sandbox
-$ sudo singularity shell -w my_sandbox
-Singularity: Invoking an interactive shell within container...
-Singularity my_sandbox:~>
-```
-
----
-
-## How do I execute commands in singularity
-
-Commands in the container can be given as normal.
-
-```
-singularity exec my_image.simg ls
-```
-```
-$ singularity shell my_image.simg
-Singularity: Invoking an interactive shell within container...
-Singularity my_image.simg:~> ls
-```
-
----
-
-## Transfer files into container
-
-**Read mode:** You can read/write to file system outside container and
-read inside container.
-
-**write mode:** You can read/write inside container.
-
-@color[darkgreen](**Remember:** In write mode you are user ROOT, home folder: /root)
-
----
-
-## How to transfer files into the container
-
-```
-$ sudo singularity exec -w my_sandbox mkdir singularity_folder
-$ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
-Singularity my_sandbox:~> cp singularity_folder/file1 .
-```
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
-
----
-
-## @color[red](Exercise 2: Create your own container)
-
-@ul[](false)
-- Go to docker hub and find the official latest ubuntu
-- build the container using singularity
-- Build a writeable sandbox
-- Install necessary tools into the container (Compiler etc...)
-  - apt-get update
-  - apt-get install build-essential
-@ulend
-
----
-
-## singularity.d folder
-
-Startup scripts etc... for your singularity image
-
-```
-$ singularity exec my_image.simg ls -l /.singularity.d
-total 1
-drwxr-xr-x 2 root root  76 Sep 11 17:05 actions
-drwxr-xr-x 2 root root 139 Sep 11 17:23 env
-drwxr-xr-x 2 root root   3 Sep 11 17:05 libs
--rwxr-xr-x 1 root root  33 Sep 11 17:23 runscript
--rwxr-xr-x 1 root root  10 Sep 11 17:05 runscript.help
-```
-
-@color[darkgreen](**Important:** The files must be executable and owned by root)
-
----
-
-## Creating a script
-
-@snap[align-left]
-runscript
-@snapend
-
-```
-#!/bin/sh
-
-ls -l
-```
-@snap[align-left]
-command
-@snapend
-```
-$ singularity run my_image.simg
-total 1
-drwxr-xr-x 2 root root  76 Sep 11 17:05 file1
-drwxr-xr-x 2 root root 139 Sep 11 17:23 file2
-```
-
----
-
-## What is a help file and how is it used
-
-@snap[align-left]
-runscript.help
-@snapend
-
-```
-This is a text file
-```
-@snap[align-left]
-command
-@snapend
-```
-$ singularity help my_image.simg
-This is a text file
-```
-
----
-
-## Build a new container from a sandbox
-
-```
-$ sudo singularity build my_new_image.simg my_sandbox
-Building image from sandbox: my_sandbox
-Building Singularity image...
-Singularity container built: my_new_image.simg
-Cleaning up...
-```
-
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
-
----
-
-## @color[red](Exercise 3: Edit your own container)
-
-@ol[](false)
-- Create a help file
-- Create/Edit the runscript running hello world
-- Create a new container from the sandbox
-@olend
-
-@color[darkgreen](**Tip:** You can use the editor in your VM and then transfer the file)
-
----
-
-## Running your container in an HPC environment
-
----
-
-## Requirements
-
-- OpenMPI version must be the same in container and cluster
-- Compiler and version must be the same in container and cluster
-- You need to bind to the LUSTRE file system at PDC so it can be detected
-
----
-
-## What are the required tools
-
-wget, build-essential, lzip, m4, libgfortran3, gmp, mpfr, mpc,
-zlib, gcc, openmpi, cmake, python, cuda
-
-- On AFS
-  - /afs/pdc.kth.se/pdc/vol/singularity/2.5.1/shub.backup
-- On Lustre
-  - /cfs/klemming/pdc.vol.tegner/singularity/2.4.2/shub
-- **Image:** ubuntu-16.04.3-gcc-basic.simg
-- https://www.pdc.kth.se/software
-
----
-
-## Send in a singularity batch job and execute
-
-```
-#!/bin/bash -l
-#SBATCH -J myjob
-#SBATCH -A edu18.prace
-#SBATCH --reservation=prace-2018-10-25
-#SBATCH -t 1:00
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=8
-#SBATCH -o output_file.o
-module add gcc/6.2.0 openmpi/3.0-gcc-6.2 singularity
-mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
-```
-
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
-
----
-
-## @color[red](Exercise 4: Run a HPC container)
-
-@ol[](false)
-- Login into tegner.pdc.kth.se
-- send in a job for the hello-world image
-  - Use the hello_world image on PDCs singularity repository
-@olend
-
-@color[darkgreen](**Tip:** With the singularity module use the **Path:** $PDC_SHUB)
-
----
-
-## How about GPUs?
-
-**Flag:** --nv
-
-Finds the relevant nVidia/CUDA libraries on your host.
- 
-```
-salloc -t <time> -A edu18.prace --gres=gpu:K420:1
-srun -N 1 singularity exec --nv -B /cfs/klemming cuda.simg cuda_device
-Device Number: 0
-  Device name: Quadro K420
-  Memory Clock Rate (KHz): 891000
-  Memory Bus Width (bits): 128
-  Peak Memory Bandwidth (GB/s): 28.512000
-```
-
----
-
-## Creating recipes for singularity
-
----
-
-## Singularity Recipes
-
-A Singularity Recipe is the driver of a custom build, and the starting point
-for designing any custom container. It includes specifics about installation
-software, environment variables, files to add, and container metadata
-
----
-
-## How to build from a recipe
-
-A recipe is a textfile explaining what should be put into the container
-
-```
-sudo singularity build my_image.simg my_recipe
-```
-
----
-
-## Recipe format
-
-```
-# Header
-Bootstrap: docker
-From: ubuntu:latest
-# Sections
-%help
-  Help me. I'm in the container.
-%files
-    mydata.txt /home
-%post
-    apt-get -y update
-    apt-get install -y build-essential
-%runscript
-    echo "This is my runscript"
-```
-
----
-
-## Header
-
-What image should we start with?
-
-- *Bootstrap:*
-  - shub
-  - docker
-  - localimage
-- *From:*
-  - The name of the container
-```
-# Header
-Bootstrap: docker
-From: ubuntu:latest
-```
-
----
-
-## Section: %help
-
-Some information about your container.
-Valuable to put information about what software and versions
-are available in the container
-
-```
-%help
-  This container is based on UBUNTU 16.04. GCC v6.2 installed
-```
-
----
-
-## Section: %post
-
-What softwares should be installed in my container.
-
-```
-%post
-    apt-get -y update
-    apt-get install -y build-essential
-```
-
-@snap[align-left]
-@color[darkgreen](No interaction in the scripts)<br>
-@color[darkgreen](We do not need sudo in the container)
-@snapend
-
----
-
-## Section: %files
-
-What local files should be copied into my container
-
-```
-%files
-    # <filename> <singularity path>
-    myfile.txt /opt
-```
-
----
-
-## Section: %runscript
-
-What should be executed with the run command.
-
-```
-%runscript
-    mysoftware -param1 -param2
-    
-```
-
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
-
----
-
-## @color[red](Exercise 5: Create a recipe)
-
-@ol[](false)
-- Based on UBUNTU
-- Install compilers
-- Create a help text
-- Create a runscript
-- Run the recipe
-@olend
-
-@color[darkgreen](**Tip:** You can use the editor in your VM and then transfer the file)
-
----
-
-## Useful links
-
-- https://www.pdc.kth.se/software/software/singularity/
-- https://www.sylabs.io/guides/2.6/user-guide/
-- https://gitpitch.com/PDC-support/singularity-introduction#/
+This presentation is available at 
+https://gitpitch.com/PDC-support/introduction-to-pdc/course-gitpitch

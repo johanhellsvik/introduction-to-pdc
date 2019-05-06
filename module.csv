@@ -1,0 +1,6 @@
+Command,Scope
+module add *software[/version]*,loads *software[/version]*
+module avail,Lists available softwares
+module show *software*,shows information about *software*
+module list,Lists currently loaded softwares
+module swap *frommodule* *tomodule*,swaps *frommodule* to *tomodule*
