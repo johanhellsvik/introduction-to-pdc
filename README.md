@@ -1,11 +1,9 @@
-# Introduction to PDC
+Introduction to PDC
+-------------------
 
-This is a presentation that can be used to introduce PDC in various courses, including
-the PDC summer school, Introduction to PDC courses, and other KTH courses which
-use PDC resources. The presentation is currently in LaTeX using the beamer package.
+This is a presentation on introducint the PDC environment
+The entire presentation is created using Gitpitch with custom CSS.
 
-Compile with `pdflatex presentation.tex`.
-
-The project is licensed under the terms of the GNU Free Documentation License (GFDL).
-
+This presentation can be viewed at
+https://gitpitch.com/PDC-support/introduction-to-pdc/tree/course-gitpitch
 
