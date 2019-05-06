@@ -26,11 +26,11 @@
 
 ---
 
-snap[north-west]
+@snap[north-west]
 *SNIC Centra*
 @snapend
 
-@snap[south-west span-45]
+@snap[south-west span-45 text-left text-14]
 The Swedish National Infrastructure for Computing (SNIC) is a
 national research infrastructure that provides a balanced and
 cost-efficient set of resources and user support for large scale
@@ -39,7 +39,7 @@ scientific disciplines and from all over Sweden (universities, university
 colleges, research institutes, etc). The resources are made available
 through open application procedures such that the best Swedish research is supported.
 @snapend
-@snap[south-east text-left span-45]
+@snap[south-east borderless span-45]
 ![](img/sweden.png)
 @snapend
 
@@ -66,39 +66,39 @@ Ensure that PDC’s HPC and storage facilities run smoothly and securely
 
 ## PDC's Key Assets: HPC Application Experts
 
-@snap[north text-12]
+@snap[north text-06]
 PDC-HPC application experts hold PhD degrees in different scientific fields and are experts in HPC. 
 Together with researchers, they optimize, scale and enhance scientific codes for the next generation
 supercomputers.
 @snapend
 
-@snap[east span-33 text-12]
+@snap[east span-33 text-06]
 ![](img/thor_wikfeldt.png)
 
 Molecular Dynamics
 @snapend
-@snap[span-33 text12]
+@snap[span-33 text06]
 ![](img/henric_zazzi.png)
 
 Bioinformatics/Molecular biology
 @snapend
-@snap[west span-33 text-12]
+@snap[west span-33 text-06]
 ![](img/jing_gong.png)
 
 Computational Fluid Dynamics
 @snapend
-@snap[south-east span-33 text-12]
+@snap[south-east span-33 text-06]
 ![](img/xin_li.png)
 
 Multiscale Modelling
 @snapend
-@snap[south span-33 text-12]
+@snap[south span-33 text-06]
 ![](img/tor_kjellsson.png)
 
 Code Optimization
 @snapend
-@snap[south-west span-33 text-12]
-![](img/xavier_guilar.png)
+@snap[south-west span-33 text-06]
+![](img/xavier_aguilar.png)
 
 Machine Learning/Performance Analysis
 @snapend
@@ -144,21 +144,21 @@ Machine Learning/Performance Analysis
 
 ## Summary of PDC resources
 
-Computer | Beskow | Tegner
--------- | ------ | ------
-Core/node | 32/36 | 48/24
-Nodes | 2060 | **50**: 24 Haswell/GPU
-... |  | **10**: 48 Ivy bridge
-RAM (Gb) | 64 | **50**: 512
-... |  | **5**: 1000
-... |  | **5**: 2000
-Small allocations | 5000 |  
-Medium allocations | 200000 | 50000 
-Large allocations | >200000 | 
-Allocations via SNIC | yes | no 
-Lifetime | Q4 2020 | Q4 2020
-AFS | login node only | yes
-Lustre | yes | yes
+| Computer | Beskow | Tegner |
+| --- | --- | --- |
+| Core/node | 32/36 | 48/24 |
+| Nodes | 2060 | **50**: 24 Haswell/GPU |
+| ... |  | **10**: 48 Ivy bridge |
+| RAM (Gb) | 64 | **50**: 512 |
+| ... |  | **5**: 1000 |
+| ... |  | **5**: 2000 |
+| Small allocations | 5000 |   |
+| Medium allocations | 200000 | 50000  |
+| Large allocations | >200000 |  |
+| Allocations via SNIC | yes | no  |
+| Lifetime | Q4 2020 | Q4 2020 |
+| AFS | login node only | yes |
+| Lustre | yes | yes |
 
 ---
 
@@ -218,12 +218,12 @@ PDC uses kerberos together with **SSH** for login
 
 ## Kerberos commands
 
-Command | Scope
-------- | -----
-kinit | proves your identity
-klist | list your kerberos tickets
-kdestroy | destroy your kerberos ticket file
-kpasswd | change your kerberos password
+| Command | Scope
+| --- | ---
+| kinit | proves your identity
+| klist | list your kerberos tickets
+| kdestroy | destroy your kerberos ticket file
+| kpasswd | change your kerberos password
 
 ```
 $ kinit -f <username>@NADA.KTH.SE
@@ -436,13 +436,13 @@ module-whatis	 FFTW 3.3.4.0 - Fastest Fourier Transform in the West
 
 ## Module commands
 
-Command | Scope
-------- | -----
-module add *software[/version]* | loads *software[/version]*
-module avail | Lists available softwares
-module show *software* | shows information about *software*
-module list | Lists currently loaded softwares
-module swap *frommodule* *tomodule* | swaps *frommodule* to *tomodule*
+| Command | Scope
+| --- | ---
+| module add *software[/version]* | loads *software[/version]*
+| module avail | Lists available softwares
+| module show *software* | shows information about *software*
+| module list | Lists currently loaded softwares
+| module swap *frommodule* *tomodule* | swaps *frommodule* to *tomodule*
 
 ---
 
