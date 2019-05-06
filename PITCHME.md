@@ -64,9 +64,8 @@ Ensure that PDC’s HPC and storage facilities run smoothly and securely
 
 ---
 
-## PDC's Key Assets: HPC Application Experts
-
-@snap[north text-06]
+@snap[north-west]
+<h2>HPC Application Experts</h2>
 PDC-HPC application experts hold PhD degrees in different scientific fields and are experts in HPC. 
 Together with researchers, they optimize, scale and enhance scientific codes for the next generation
 supercomputers.
@@ -77,7 +76,7 @@ supercomputers.
 
 Molecular Dynamics
 @snapend
-@snap[span-33 text06]
+@snap[midpoint span-33 text06]
 ![](img/henric_zazzi.png)
 
 Bioinformatics/Molecular biology
