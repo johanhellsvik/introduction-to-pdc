@@ -68,32 +68,32 @@ Together with researchers, they optimize, scale and enhance scientific codes for
 supercomputers.
 @snapend
 
-@snap[east span-33 text-06 text-left]
-![](img/thor_wikfeldt.png)
+@snap[east span-33 text-06]
+![](img/thor_wikfeldt.png)<br>
 Molecular Dynamics
 @snapend
 
-@snap[midpoint span-33 text-06 text-left]
-![](img/henric_zazzi.png)
+@snap[midpoint span-33 text-06]
+![](img/henric_zazzi.png)<br>
 Bioinformatics/Molecular biology
 @snapend
 
-@snap[west span-33 text-06 text-left]
-![](img/jing_gong.png)
+@snap[west span-33 text-06]
+![](img/jing_gong.png)<br>
 Computational Fluid Dynamics
 @snapend
 
-@snap[south-east span-33 text-06 text-left]
-![](img/xin_li.png)
+@snap[south-east span-33 text-06]
+![](img/xin_li.png)<br>
 Multiscale Modelling
 @snapend
 
-@snap[south span-33 text-06 text-left]
-![](img/tor_kjellsson.png)
+@snap[south span-33 text-06]
+![](img/tor_kjellsson.png)<br>
 Code Optimization
 @snapend
-@snap[south-west span-33 text-06 text-left]
-![](img/xavier_aguilar.png)
+@snap[south-west span-33 text-06]
+![](img/xavier_aguilar.png)<br>
 Machine Learning/Performance Analysis
 @snapend
 
