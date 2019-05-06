@@ -1,5 +1,0 @@
-Command,Scope
-kinit,proves your identity
-klist,list your kerberos tickets
-kdestroy,destroy your kerberos ticket file
-kpasswd,change your kerberos password
