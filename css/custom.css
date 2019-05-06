@@ -29,6 +29,14 @@
   box-shadow: none;
   }
 
+.reveal table {
+  font-size: 14px;
+  }
+
+.reveal td {
+  font-size: 14px;
+  }
+
 .kthblue {
   color: #65656c;
   }
