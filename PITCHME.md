@@ -64,7 +64,7 @@ Ensure that PDC’s HPC and storage facilities run smoothly and securely
 
 ---
 
-@snap[north-west]
+@snap[north-west text-06]
 <h2>HPC Application Experts</h2>
 PDC-HPC application experts hold PhD degrees in different scientific fields and are experts in HPC. 
 Together with researchers, they optimize, scale and enhance scientific codes for the next generation
@@ -73,32 +73,30 @@ supercomputers.
 
 @snap[east span-33 text-06]
 ![](img/thor_wikfeldt.png)
-
 Molecular Dynamics
 @snapend
-@snap[midpoint span-33 text06]
-![](img/henric_zazzi.png)
 
+@snap[midpoint span-33 text-06]
+![](img/henric_zazzi.png)
 Bioinformatics/Molecular biology
 @snapend
+
 @snap[west span-33 text-06]
 ![](img/jing_gong.png)
-
 Computational Fluid Dynamics
 @snapend
+
 @snap[south-east span-33 text-06]
 ![](img/xin_li.png)
-
 Multiscale Modelling
 @snapend
+
 @snap[south span-33 text-06]
 ![](img/tor_kjellsson.png)
-
 Code Optimization
 @snapend
 @snap[south-west span-33 text-06]
 ![](img/xavier_aguilar.png)
-
 Machine Learning/Performance Analysis
 @snapend
 
