@@ -1,0 +1,67 @@
+article h1 {
+  color: #4C0099;
+}
+
+article h2 {
+  color: #4C0099;
+}
+
+.size50 {
+  font-size: 50%;
+}
+
+.size60 {
+  font-size: 60%;
+}
+
+.size75 {
+  font-size: 75%;
+}
+
+.red {
+  color: red;
+}
+
+.lightbluebox {
+	padding: 0px 10px 0px 10px; 
+	background: #DDFFFF;
+	color: 111111;
+  font-size: 75%;
+}
+
+.lighterbluebox {
+	padding: 0px 10px 0px 10px; 
+	background: #99DDFF;
+	color: 111111;
+	font-size: 75%;
+}
+
+.bluebox {
+	padding: 0px 10px 0px 10px; 
+	background: #66CCFF;
+	color: 111111;
+  font-size: 75%;
+}
+
+.column22 {
+  width:22%;
+  float:left;
+  padding:5px; 
+}
+
+.column30 {
+  width:30%;
+  float:left;
+  padding:5px; 
+}
+
+.column45 {
+  width: 45%;
+  float: left;
+  padding: 5px; 
+}
+
+.centered {
+  display: block;
+  text-align: center;
+}
