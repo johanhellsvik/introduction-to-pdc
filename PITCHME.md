@@ -274,8 +274,8 @@ $ pdc-kinit -f -l 7d <username>@NADA.KTH.SE
 # Login into cluster  
 $ pdc-ssh <cluster>.pdc.kth.se
 ```
-@css[text-06](More information at
-https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html)
+
+@css[text-06](More information at https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html)
 
 ---
 
