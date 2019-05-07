@@ -69,31 +69,31 @@ supercomputers.
 @snapend
 
 @snap[east span-33 text-06]
-<h4>Molecular Dynamics</h4>
+<h6>Molecular Dynamics</h6>
 ![](img/thor_wikfeldt.png)
 @snapend
 
 @snap[midpoint span-33 text-06]
-<h4>Bioinformatics/Molecular biology</h4>
+<h6>Bioinformatics/Molecular biology</h6>
 ![](img/henric_zazzi.png)
 @snapend
 
 @snap[west span-33 text-06]
-<h4>Computational Fluid Dynamics</h4>
+<h6>Computational Fluid Dynamics</h6>
 ![](img/jing_gong.png)
 @snapend
 
 @snap[south-east span-33 text-06]
-<h4>Multiscale Modelling</h4>
+<h6>Multiscale Modelling</h6>
 ![](img/xin_li.png)
 @snapend
 
 @snap[south span-33 text-06]
-<h4>Code Optimization</h4>
+<h6>Code Optimization</h6>
 ![](img/tor_kjellsson.png)
 @snapend
 @snap[south-west span-33 text-06]
-<h4>Machine Learning/Performance Analysis</h4>
+<h6>Machine Learning/Performance Analysis</h6>
 ![](img/xavier_aguilar.png)
 @snapend
 
