@@ -259,7 +259,7 @@ Mar 25 09:45 Mar 25 19:45 FA afs/pdc.kth.se@NADA.KTH.SE
   - Mac
   - KTH Computers
   
-https://www.pdc.kth.se/support/documents/login/login.html
+@css[text-06](https://www.pdc.kth.se/support/documents/login/login.html)
 
 ---
 
@@ -360,7 +360,7 @@ $ pdc-ssh <cluster>.pdc.kth.se
 Install AFS client and copy directly
 then AFS is mounted just like another disk on your computer
 
-https://www.pdc.kth.se/support/documents/managing_files/file_transfer_afs.html
+@css[text-06](https://www.pdc.kth.se/support/documents/managing_files/file_transfer_afs.html)
    
 ---
 
@@ -474,8 +474,7 @@ Usage: projinfo [-u <username>] [-c <clustername>] [-a] [-o]
 -h : prints this help
 ```
 
-Statistics are also available at...
-https://www-local.pdc.kth.se/software/cluster_usage/
+@css[text-06](Statistics are also available at https://www-local.pdc.kth.se/software/cluster_usage/)
    
 ---
 
@@ -670,7 +669,7 @@ $ mpiicpc  -openmp -o hello_mpi hello_mpi.cpp
 - A lot of question can be answered via our web
   http://www.pdc.kth.se/support
 -  The best way to contact us is via e-mail
-   https://www.pdc.kth.se/support/documents/contact/contact_support.html
+   @css[text-06](https://www.pdc.kth.se/support/documents/contact/contact_support.html)
 - The support request will be tracked
 - Use a descriptive subject in your email
 - Give your PDC user name.
@@ -680,4 +679,4 @@ $ mpiicpc  -openmp -o hello_mpi hello_mpi.cpp
 ---
 
 This presentation is available at 
-https://gitpitch.com/PDC-support/introduction-to-pdc/course-gitpitch
+@css[text-06](https://gitpitch.com/PDC-support/introduction-to-pdc/course-gitpitch)
