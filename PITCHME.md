@@ -26,7 +26,7 @@
 
 ---
 
-@snap[south-west span-45 text-left text-06]
+@snap[north-west span-45 text-left text-06]
 <h2>SNIC Centra</h2>
 The Swedish National Infrastructure for Computing (SNIC) is a
 national research infrastructure that provides a balanced and
@@ -36,7 +36,7 @@ scientific disciplines and from all over Sweden (universities, university
 colleges, research institutes, etc). The resources are made available
 through open application procedures such that the best Swedish research is supported.
 @snapend
-@snap[south-east borderless span-45]
+@snap[north-east borderless span-45]
 ![](img/sweden.png)
 @snapend
 
@@ -69,38 +69,32 @@ supercomputers.
 @snapend
 
 @snap[east span-33 text-06]
+<h4>Molecular Dynamics</h4>
 ![](img/thor_wikfeldt.png)
-
-Molecular Dynamics
 @snapend
 
 @snap[midpoint span-33 text-06]
+<h4>Bioinformatics/Molecular biology</h4>
 ![](img/henric_zazzi.png)
-
-Bioinformatics/Molecular biology
 @snapend
 
 @snap[west span-33 text-06]
+<h4>Computational Fluid Dynamics</h4>
 ![](img/jing_gong.png)
-
-Computational Fluid Dynamics
 @snapend
 
 @snap[south-east span-33 text-06]
+<h4>Multiscale Modelling</h4>
 ![](img/xin_li.png)
-
-Multiscale Modelling
 @snapend
 
 @snap[south span-33 text-06]
+<h4>Code Optimization</h4>
 ![](img/tor_kjellsson.png)
-
-Code Optimization
 @snapend
 @snap[south-west span-33 text-06]
+<h4>Machine Learning/Performance Analysis</h4>
 ![](img/xavier_aguilar.png)
-
-Machine Learning/Performance Analysis
 @snapend
 
 ---
