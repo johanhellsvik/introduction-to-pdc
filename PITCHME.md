@@ -206,7 +206,7 @@ PDC uses kerberos together with **SSH** for login
   - example: NADA.KTH.SE
 - @color[green](Principal)
   - Unique identity to which kerberos can assign tickets. 
-  - example: <username>@NADA.KTH.SE
+  - example: [username]@NADA.KTH.SE
 
 ---
 
@@ -311,12 +311,12 @@ $ pdc-ssh <cluster>.pdc.kth.se
 
 - Your PDC home directory is located in AFS, example:
   ```
-  /afs/pdc.kth.se/home/u/user
+  /afs/pdc.kth.se/home/[username 1st letter]/[username]
   ```  
 - OldFiles mountpoint (created by default) contains a snapshot of the files
   as they were precisely before the last nightly backup was taken.
   ```
-  /afs/pdc.kth.se/home/u/user/OldFiles
+  /afs/pdc.kth.se/home/[username 1st letter]/[username]/OldFiles
   ```
 - By default you get a limited quota (5 GB)
 
@@ -349,9 +349,9 @@ $ pdc-ssh <cluster>.pdc.kth.se
 
 ## File transfer between PDC machines
 
-- /afs is mounted and visible on all machines (at least on login node)
-- No need to "transfer" files which are on /afs
-- You can share files between machines via /afs
+- **/afs** is mounted and visible on all machines (at least on login node)
+- No need to "transfer" files which are on **/afs**
+- You can share files between machines via **/afs**
 
 ---
 
