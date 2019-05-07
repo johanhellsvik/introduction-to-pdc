@@ -74,7 +74,7 @@ supercomputers.
 @snapend
 
 @snap[midpoint span-33 text-06]
-<h6>Bioinformatics/Molecular biology</h6>
+<h6>Bioinformatics</h6>
 ![](img/henric_zazzi.png)
 @snapend
 
@@ -93,7 +93,7 @@ supercomputers.
 ![](img/tor_kjellsson.png)
 @snapend
 @snap[south-west span-33 text-06]
-<h6>Machine Learning/Performance Analysis</h6>
+<h6>Machine Learning Performance Analysis</h6>
 ![](img/xavier_aguilar.png)
 @snapend
 
@@ -274,9 +274,8 @@ $ pdc-kinit -f -l 7d <username>@NADA.KTH.SE
 # Login into cluster  
 $ pdc-ssh <cluster>.pdc.kth.se
 ```
-
-More information at
-https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
+@css[text-06](More information at
+https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html)
 
 ---
 
