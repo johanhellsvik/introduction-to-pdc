@@ -286,11 +286,6 @@ https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
 
 ---
 
-More information at
-https://www.pdc.kth.se/support/documents/login/kth_ubuntu_login.html
-
----
-
 ## File systems, permissions and transfer
 
 ---
