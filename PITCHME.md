@@ -69,31 +69,31 @@ supercomputers.
 @snapend
 
 @snap[east span-33 text-06]
-<h6>Molecular Dynamics</h6>
+@css[text-06](Molecular Dynamics)
 ![](img/thor_wikfeldt.png)
 @snapend
 
 @snap[midpoint span-33 text-06]
-<h6>Bioinformatics</h6>
+@css[text-06](Bioinformatics)
 ![](img/henric_zazzi.png)
 @snapend
 
 @snap[west span-33 text-06]
-<h6>Computational Fluid Dynamics</h6>
+@css[text-06](Computational Fluid Dynamics)
 ![](img/jing_gong.png)
 @snapend
 
 @snap[south-east span-33 text-06]
-<h6>Multiscale Modelling</h6>
+@css[text-06](Multiscale Modelling)
 ![](img/xin_li.png)
 @snapend
 
 @snap[south span-33 text-06]
-<h6>Code Optimization</h6>
+@css[text-06](Code Optimization)
 ![](img/tor_kjellsson.png)
 @snapend
 @snap[south-west span-33 text-06]
-<h6>Machine Learning Performance Analysis</h6>
+@css[text-06](Machine Learning Performance Analysis)
 ![](img/xavier_aguilar.png)
 @snapend
 
@@ -667,7 +667,7 @@ $ mpiicpc  -openmp -o hello_mpi hello_mpi.cpp
 
 
 - A lot of question can be answered via our web
-  http://www.pdc.kth.se/support
+  @css[text-06](http://www.pdc.kth.se/support)
 -  The best way to contact us is via e-mail
    @css[text-06](https://www.pdc.kth.se/support/documents/contact/contact_support.html)
 - The support request will be tracked
@@ -679,4 +679,5 @@ $ mpiicpc  -openmp -o hello_mpi hello_mpi.cpp
 ---
 
 This presentation is available at 
+
 @css[text-06](https://gitpitch.com/PDC-support/introduction-to-pdc/course-gitpitch)
