@@ -485,6 +485,18 @@ Allocation
 
 @color[green](edu19.bioexcel)
 
+Reservation
+
+Cluster | ID | Date | Start time | End time
+--- | --- | --- | --- | ---
+Tegner | bioexcel-2019-06-10 | 2019-06-10 | 12:45:00 | 17:15:00
+Tegner | bioexcel-2019-06-11 | 2019-06-11 | 11:45:00 | 17:15:00
+Tegner | bioexcel-2019-06-12 | 2019-06-12 | 11:45:00 | 17:15:00
+Tegner | bioexcel-2019-06-13 | 2019-06-13 | 11:45:00 | 17:15:00
+Beskow | bioexcel-2019-06-11 | 2019-06-11 | 11:45:00 | 17:15:00
+Beskow | bioexcel-2019-06-12 | 2019-06-12 | 11:45:00 | 17:15:00
+Beskow | bioexcel-2019-06-13 | 2019-06-13 | 11:45:00 | 17:15:00
+
 ---
 
 ## Using salloc
