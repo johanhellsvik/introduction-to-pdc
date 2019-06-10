@@ -114,7 +114,6 @@ supercomputers.
 ## Beskow
 
 - 32nd place on the top500 (Q4 2015)
-- Fastest in Scandinavia
 - Intended for very large jobs (>512 core/job)
 - Allocated through SNIC
 - Queue limit is 24 hours
