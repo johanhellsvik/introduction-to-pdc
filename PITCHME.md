@@ -177,14 +177,14 @@ supercomputers.
 
 ## Time allocations
 
-@snap[size40 with-border]
+@snap[text-06 with-border]
 **Small allocation**<br>
 Applicant can be a PhD student or higher<br>
 Evaluated on a technical level only<br>
 Limits is usually 5000 corehours/month<br>
 @snapend
 
-@snap[size40 with-border]
+@snap[text-06 with-border]
 **Medium allocation**<br>
 Applicant must be a senior scientist in swedish academia<br>
 Evaluated on a technical level only<br>
@@ -192,7 +192,7 @@ Limits depend on machine<br>
 On large clusters: 200 kcorehours/month<br>
 @snapend	
 
-@snap[size40 with-border]
+@snap[text-06 with-border]
 **Large allocation**<br>
 Applicant must be a senior scientist in swedish academia<br>
 Need evidence of successful work at a medium level<br>
@@ -208,7 +208,7 @@ No formal limits<br>
 - All resources are free of charge for Swedish academia
 - Please acknowledge SNIC/PDC when using these resources.
 
-@snap[size40 with-border]
+@snap[text-06 with-border]
 The computations/simulations/[SIMILAR] were performed on resources
 provided by the Swedish National Infrastructure for Computing (SNIC) at [CENTERNAME (CENTER-ACRONYME)]. 
 @snapend
