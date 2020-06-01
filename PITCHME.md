@@ -50,12 +50,11 @@ Ensure that PDC’s HPC and storage facilities run smoothly and securely
 
 ---
 
-@snap[north text-06]
-<h2>HPC Application Experts</h2>
+## HPC Application Experts
+
 PDC-HPC application experts hold PhD degrees in different scientific fields and are experts in HPC. 
 Together with researchers, they optimize, scale and enhance scientific codes for the next generation
 supercomputers.
-@snapend
 
 | Name | Area |
 | --- | --- |
@@ -165,6 +164,8 @@ supercomputers.
 - You can apply for a SUPR account at http://supr.snic.se
 - Apply for a PDC account via SUPR to Link your SUPR account
 
+---
+
 ## Apply to a PDC account for courses
 
 - Electronic copy of your passport
@@ -176,28 +177,28 @@ supercomputers.
 
 ## Time allocations
 
-@snap[with-border]
+@snap[size40 with-border]
 **Small allocation**<br>
-- Applicant can be a PhD student or higher
-- Evaluated on a technical level only
-- Limits is usually 5000 corehours/month
+Applicant can be a PhD student or higher<br>
+Evaluated on a technical level only<br>
+Limits is usually 5000 corehours/month<br>
 @snapend
 
-@snap[with-border]
+@snap[size40 with-border]
 **Medium allocation**<br>
-- Applicant must be a senior scientist in swedish academia
-- Evaluated on a technical level only
-- Limits depend on machine
-- On large clusters: 200 kcorehours/month
+Applicant must be a senior scientist in swedish academia<br>
+Evaluated on a technical level only<br>
+Limits depend on machine<br>
+On large clusters: 200 kcorehours/month<br>
 @snapend	
 
-@snap[with-border]
+@snap[size40 with-border]
 **Large allocation**<br>
-- Applicant must be a senior scientist in swedish academia
-- Need evidence of successful work at a medium level
-- Evaluated on a technical and scientific level
-- Proposal evaluated by SNAC twice a year
-- No formal limits
+Applicant must be a senior scientist in swedish academia<br>
+Need evidence of successful work at a medium level<br>
+Evaluated on a technical and scientific level<br>
+Proposal evaluated by SNAC twice a year<br>
+No formal limits<br>
 @snapend
 
 ---
@@ -207,16 +208,12 @@ supercomputers.
 - All resources are free of charge for Swedish academia
 - Please acknowledge SNIC/PDC when using these resources.
 
-@snap[with-border]
+@snap[size40 with-border]
 The computations/simulations/[SIMILAR] were performed on resources
 provided by the Swedish National Infrastructure for Computing (SNIC) at [CENTERNAME (CENTER-ACRONYME)]. 
 @snapend
 
 - Acknowledge them or include them in article if somebody has contributed 
-
-@snap[with-border]
-NN at [CENTER-ACRONYME] is acknowledged for assistance concerning technical and implementational aspects [OR SIMILAR] in making the code run on the [OR SIMILAR] [CENTER-ACRONYME] resources.
-@snapend
   
 @color[red](Acknowledgement will be taken into consideration when applying for new resources.)
 
@@ -232,18 +229,6 @@ Used to load a specific software, and versions, into your environment
 
 ---
 
-## Module commands
-
-| Command | Scope
-| --- | ---
-| module add *software[/version]* | loads *software[/version]*
-| module avail | Lists available softwares
-| module show *software* | shows information about *software*
-| module list | Lists currently loaded softwares
-| module swap *frommodule* *tomodule* | swaps *frommodule* to *tomodule*
-
----
-
 ## Available software
 
 On our cluster, we have already installed a number of software with
@@ -252,10 +237,6 @@ their different versions.
 More information about the software, how they were installed and how to run them at PDC is available at
 https://www.pdc.kth.se/software
    
----
-
-## How to run jobs
-
 ---
 
 ## SLURM queue system
@@ -299,7 +280,6 @@ Usage: projinfo [-u <username>] [-c <clustername>] [-a] [-o]
 - Use a descriptive subject in your email
 - Give your PDC user name.
 - Provide all necessary information to reproduce the problem.
-- For follow ups always reply to our emails
 
 ---
 
