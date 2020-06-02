@@ -88,7 +88,7 @@ supercomputers.
 - Queue limit is 24 hours
 - Runs the SLURM queue system
 - Partially reserved for PRACE, SCANIA, INCF
-- Lifetime: Q4 2020
+- Lifetime: Q1 2021
   
 ---  
   
@@ -100,7 +100,7 @@ supercomputers.
 - Has large RAM nodes
 - Has nodes with GPUs
 - Runs the SLURM queue system
-- Lifetime: Q4 2020  
+- Lifetime: Q1 2021  
 
 ---
 
@@ -118,7 +118,7 @@ supercomputers.
 | Medium allocations | 200000 | 50000  |
 | Large allocations | >200000 |  |
 | Allocations via SNIC | yes | no  |
-| Lifetime | Q4 2020 | Q4 2020 |
+| Lifetime | Q1 2021 | Q1 2021 |
 | AFS | login node only | yes |
 | Lustre | yes | yes |
 
