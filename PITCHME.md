@@ -114,7 +114,7 @@ supercomputers.
 | RAM (Gb) | 64/128 | **50**: 512 |
 | ... |  | **5**: 1000 |
 | ... |  | **5**: 2000 |
-| Small allocations | 5000 |   |
+| Small allocations | | 5000 |
 | Medium allocations | 200000 | 50000  |
 | Large allocations | >200000 |  |
 | Allocations via SNIC | yes | no  |
