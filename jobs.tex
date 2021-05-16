@@ -53,15 +53,13 @@
   \begin{verbatim}
   $ salloc -A <account> -t <d-hh:mm:ss> -N <nodes>
   salloc: Granted job allocation 123456
-   \end{verbatim}
+  \end{verbatim}
 \end{exampleblock}
 
 \begin{exampleblock}{Run application on \alert{\textbf{Beskow}}}
   \begin{verbatim}
-  $ aprun -n <PEs> -d <depth> -N <PEs_per_node> ./binary.x
-#PEs 	- number of processing elements
-#depth 	- number of threads (depth) per PE
-#PEs_per_node 	- PEs per node
+  $ srun -n <PEs> ./binary.x
+  #PEs 	- number of processing elements (MPI processes)
   \end{verbatim}
 \end{exampleblock}
   
@@ -89,7 +87,7 @@ The script should contain all necessary data to identify the account and request
   \begin{verbatim}
 #!/bin/bash -l
 
-#SBATCH -A summer-2017
+#SBATCH -A summer-2019
 #SBATCH -J myjob
 #SBATCH -t 1:00:00
 #SBATCH --nodes=4
@@ -97,7 +95,7 @@ The script should contain all necessary data to identify the account and request
 #SBATCH -e error_file.e
 #SBATCH -o output_file.o
 
-aprun -n 128 ./myexe > my_output_file 2>&1
+srun -n 128 ./myexe > my_output_file
   \end{verbatim}
 \end{exampleblock}
 
