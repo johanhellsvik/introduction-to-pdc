@@ -39,7 +39,7 @@
 \begin{columns}
 \column{.6\textwidth}
   \begin{itemize}
-    \item Lifetime: Q2 2021
+    \item Lifetime: Q3 2021
     \item $11$ racks, $2060$ nodes
     \item Intel Haswell processor 2.3 GHz \\ Intel Broadwell processor 2.1 GHz
     \item $67,456$ cores - $32$($36$) cores/node
@@ -64,23 +64,23 @@
 \begin{columns}
 \column{.4\textwidth}
 \scriptsize
-  \begin{alertblock}{$5$ x $2$TB Fat nodes}
-    $4$ x $12$ core Ivy Bridge, $2$TB RAM \\
+  \begin{alertblock}{$5$ x $2$~TB Fat nodes}
+    $4$ x $12$ core Ivy Bridge, $2$~TB RAM \\
     $2$ x Nvidia Quadro K420
   \end{alertblock}
   
-  \begin{alertblock}{$5$ x $1$TB Fat nodes}
-    $4$ x $12$ core Ivy Bridge, $1$TB RAM \\
+  \begin{alertblock}{$5$ x $1$~TB Fat nodes}
+    $4$ x $12$ core Ivy Bridge, $1$~TB RAM \\
     $2$ x Nvidia Quadro K420
   \end{alertblock}
   
   \begin{alertblock}{$46$ Thin Nodes}
-    $2$ x $12$ core Haswell, $512$GB RAM \\
+    $2$ x $12$ core Haswell, $512$~GB RAM \\
     Nvidia Quadro K420 GPU
   \end{alertblock}
 
   \begin{alertblock}{$9$ K80 Nodes}
-    $2$ x $12$ core Haswell, $512$GB RAM \\
+    $2$ x $12$ core Haswell, $512$~GB RAM \\
     Nvidia Tesla K80 GPU
   \end{alertblock}
 
@@ -93,7 +93,7 @@
     \item Has large RAM nodes
     \item Has nodes with GPUs
     \item Has two transfer nodes
-    \item Lifetime: Q2 2021
+    \item Lifetime: Q3 2021
   \end{itemize}
 \end{columns}
 }
@@ -109,9 +109,9 @@
   Cores in each node &  $32/36$ & $48/24$\\\hline
   Nodes &  $1676$ Haswell  & 55 x $24$ Haswell/GPU\\
         &  $384$ Broadwell & 10 x $48$ Ivy bridge\\\hline
-  RAM (GB) & $1676$ x $64$GB & $55$ x $512$GB\\
-           & $384$ x $128$GB & $5$ x $1$TB\\
-           &                 & $5$ x $2$TB\\\hline
+  RAM (GB) & $1676$ x $64$~GB & $55$ x $512$~GB\\
+           & $384$ x $128$~GB & $5$ x $1$~TB\\
+           &                 & $5$ x $2$~TB\\\hline
   Allocations &&\\
   (core hours per month)&&\\
   Small &	$<5k$&	$<5k$\\
@@ -139,7 +139,7 @@
 \begin{block}{Lustre File System (\alert{Klemming})}
 \begin{itemize}
  \item Open-source massively parallel distributed file system
- \item Very high performance ($5$PB storage - $130$GB/s bandwidth)
+ \item Very high performance ($5$~PB storage - $130$~GB/s bandwidth)
  \item NO backup (always move data when done), 25 GB personal quota
  \item Home directory \\  \url{/cfs/klemming/nobackup/[initial]/[username]}
 \end{itemize}
