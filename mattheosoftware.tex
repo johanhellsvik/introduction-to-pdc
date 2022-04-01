@@ -1,0 +1,94 @@
+\section{Your code on Dardel}
+
+\begin{comment}
+\frame{
+  \frametitle{How to get your code running on the Dardel CPU partition}
+  \begin{itemize}
+  \item Good practice: Build code with two different tool chains
+    \item On Dardel use PrgEnv-cray and PrgEnv-gnu
+    %\item Building with PrgEnv-cray toolchain
+    \item Cray Compiling Environment (CCE)
+    \begin{itemize}
+    %\item Cray Compiling Environment (CCE)
+      \item The CCE C/C++ compiler is based on Clang/LLVM.
+      \item CCE Fortran Supports most of Fortran 2018 (ISO/IEC 1539:2018) with some exceptions
+    \end{itemize}
+  \item Building with PrgEnv-gnu toolchain
+  \item Scaling analyzes and performance tuning
+  \end{itemize}
+}
+\end{comment}
+
+\frame{
+  \frametitle{How to get your code running on the Dardel CPU partition}
+  \begin{itemize}
+    \item Good practice: Build code with two different tool chains
+    \item On Dardel use PrgEnv-cray and PrgEnv-gnu
+    \item For libraries and include files covered by module files, you should not add anything to your Makefile
+    \begin{itemize}
+      \item No additional MPI flags are needed (included by wrappers)
+      \item No need to add any -I, -l or –L flags for the Cray provided libraries
+      \item If Makefile needs an input for –L work correctly, try using '.'
+    \end{itemize}
+    \item OpenMP is supported by all of the PrgEnvs
+    \begin{itemize}
+      \item PrgEnv-cray (Fortran) -homp
+      \item PrgEnv-cray (C/C++) -fopenmp
+      \item PrgEnv-gnu -fopenmp
+    \end{itemize}
+  \end{itemize}
+}
+
+\begin{comment}
+\frame{
+  \frametitle{PrgEnv-cray
+  \begin{itemize}
+    \item The PrgEnv-cray is the native environment on a HPE Cray EX supercomputer
+    \item Cray Compiling Environment (CCE)
+    \begin{itemize}
+      \item The CCE C/C++ compiler is based on Clang/LLVM.
+      \item CCE Fortran Supports most of Fortran 2018 (ISO/IEC 1539:2018) with some exceptions
+    \end{itemize}
+    \item Cray Scientific and Math Libraries (CSML)
+    \begin{itemize}
+        \item High Performance libraries for scientific applications (BLAS, LAPACK, ScaLAPCK, FFTW, NetCDF)
+    \end{itemize}
+    \item Cray Message Passing Toolkit (CMPT)
+    \begin{itemize}
+      \item Provides the Message Passing Interface (MPI) and OpenSHMEM
+    \end{itemize}
+    %\item Cray Environment Setup and Compiling Support (CENV)
+    %\item Infrastructure to support the development environment
+    %\item Includes compiler drivers, hugepages support and the PE packaging API
+    %\item Cray Performance Measurement and Analysis Tools (CPMAT)
+    %\item Provides tools to analyse performance and behaviour of programs and the PAPI performance API
+    %\item Cray Debugging Support Tools (CDST)
+    %\item Provides debugging tools including gdb4hpc and valgrind4hpc
+  \end{itemize}
+}
+\end{comment}
+
+\frame{
+  \frametitle{How to get your code running on the Dardel GPU partition}
+  \begin{itemize}
+  \item Porting of CUDA code to HIP with hipify
+  \item Higher level offloading with openMP
+  \item Lower level offloading to GPU with HIP
+  \item \emph{list other routes to get code on AMD GPUs}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Needs and challenges for specific codes}
+  \framesubtitle{Uppsala / KTH / Örebro / Belém / Pohang materials theory codes}
+  \begin{itemize}
+  \item RSPt
+  \item Elk
+  \item UppASD
+  \item TRIQS/cthyb
+  \item RS-LMTO-ASA
+  \end{itemize}
+  \begin{itemize}
+  \item RSPt
+  \end{itemize}
+}

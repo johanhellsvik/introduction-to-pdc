@@ -1,150 +1,120 @@
 \section{Infrastructure}
 
-%\subsection*{Overview}
-%\frame{
-%\frametitle{What is a cluster?}
-%\framesubtitle{\includegraphics[height=0.3\textheight,width=\textwidth]{Titan1}}
-%
-%\begin{columns}[T]
-%\column{.4\textwidth}
-%  \includegraphics[width=\columnwidth]{TitanIn}
-%  \column{.3\textwidth}
-%  \begin{itemize}
-%    \item Cluster
-%    \item Racks
-%    \item Blades
-%    \item Nodes
-%    \item Processors 
-%    \item Cores
-%  \end{itemize}
-%\column{.3\textwidth}
-%  \begin{itemize}
-%    \item Login nodes
-%    \item Compute nodes
-%    \item Dedicated nodes
-%    \item Transfer nodes
-%    \item Service nodes
-%  \end{itemize}
-%\end{columns}
-%}
-
-
-\subsection{Beskow}
+\subsection{Dardel}
 \frame{
-\frametitle{Beskow - Cray XC40 system}
-\framesubtitle{\hspace{0.2\textwidth}\includegraphics[height=0.3\textheight]{Beskow}}
+\frametitle{Dardel - an HPE Cray XE supercomputer}
 
-\begin{alertblock}{}{\alert{Fastest machine in Scandinavia}}\end{alertblock}
+\begin{alertblock}{}{\alert{CPU partition}}\end{alertblock}
 
 \begin{columns}
 \column{.6\textwidth}
   \begin{itemize}
-    \item Lifetime: Q3 2021
-    \item $11$ racks, $2060$ nodes
-    \item Intel Haswell processor 2.3 GHz \\ Intel Broadwell processor 2.1 GHz
-    \item $67,456$ cores - $32$($36$) cores/node
-    \item Aries Dragonfly network topology
-    \item $156.4$ TB memory - $64$($128$) GB/node
+    \item 2.279 petaFlops (Top500 Nov 2021)
+    \item 554 CPU nodes
+    \item Dual AMD EPYC$^{\rm TM}$ 64-core processors
+    \item 256, 512, 1024, or 2048 GB memory
   \end{itemize}
 \column{.4\textwidth}
-  \includegraphics[width=\columnwidth]{xc30-blade}
-  \scriptsize\\
-  $1$ XC compute blade\\
-  $1$ Aries Network Chip ($4$ NICs)\\
-  $4$ Dual-socket Xeon nodes\\
-  $4$ Memory DIMM / Xeon node
+  \includegraphics[width=\columnwidth]{dardel}
 \end{columns}
-}
 
-\subsection{Tegner}
-\frame{
-\frametitle{Tegner}
-\framesubtitle{pre/post processing for Beskow}
+\begin{alertblock}{}{\alert{GPU partition}}\end{alertblock}
 
 \begin{columns}
-\column{.4\textwidth}
-\scriptsize
-  \begin{alertblock}{$5$ x $2$~TB Fat nodes}
-    $4$ x $12$ core Ivy Bridge, $2$~TB RAM \\
-    $2$ x Nvidia Quadro K420
-  \end{alertblock}
-  
-  \begin{alertblock}{$5$ x $1$~TB Fat nodes}
-    $4$ x $12$ core Ivy Bridge, $1$~TB RAM \\
-    $2$ x Nvidia Quadro K420
-  \end{alertblock}
-  
-  \begin{alertblock}{$46$ Thin Nodes}
-    $2$ x $12$ core Haswell, $512$~GB RAM \\
-    Nvidia Quadro K420 GPU
-  \end{alertblock}
-
-  \begin{alertblock}{$9$ K80 Nodes}
-    $2$ x $12$ core Haswell, $512$~GB RAM \\
-    Nvidia Tesla K80 GPU
-  \end{alertblock}
-
-\column{.6\textwidth}
-\normalsize
-\centering\includegraphics[width=.5\columnwidth]{k420}
-  
+\column{1.\textwidth}
   \begin{itemize}
-    \item Used for pre/post processing data 
-    \item Has large RAM nodes
-    \item Has nodes with GPUs
-    \item Has two transfer nodes
-    \item Lifetime: Q3 2021
+    \item $56$ GPU nodes
+    \item AMD EPYC$^{\rm TM}$ processor with 64 cores)
+    \item 512 GB memory
+    \item four AMD Instinct$^{\rm TM}$ MI250X GPUs
   \end{itemize}
 \end{columns}
-}
 
-
-\subsection*{Summary}
-\frame{
-\frametitle{Summary of PDC resources}
-\framesubtitle{}
-\begin{table}
-  \begin{tabular}{r|l|l}
-   & \alert{Beskow} & \alert{Tegner}\\ \hline \hline
-  Cores in each node &  $32/36$ & $48/24$\\\hline
-  Nodes &  $1676$ Haswell  & 55 x $24$ Haswell/GPU\\
-        &  $384$ Broadwell & 10 x $48$ Ivy bridge\\\hline
-  RAM (GB) & $1676$ x $64$~GB & $55$ x $512$~GB\\
-           & $384$ x $128$~GB & $5$ x $1$~TB\\
-           &                 & $5$ x $2$~TB\\\hline
-  Allocations &&\\
-  (core hours per month)&&\\
-  Small &	$<5k$&	$<5k$\\
-  Medium &	$<200k$&	$<80k$\\
-  Large &	$\geq 200k$	 \\\hline
-  Availability via SNIC &	yes &	with Beskow\\\hline
-  AFS &	login node only &	yes\\
-  Lustre &	yes	& yes\\
-  \end{tabular}
-\end{table}
 }
 
 \subsection*{File systems}
 \frame{
 \frametitle{File Systems}
-\begin{block}{Andrew File System (\alert{AFS})}
-\begin{itemize}
-  \item Distributed file system accessible to any running AFS client
-  \item Home directory \\  \url{/afs/pdc.kth.se/home/[initial]/[username]}
-  \item Access via Kerberos tickets and AFS tokens
-  \item \alert{Not accessible to compute nodes on Beskow}
-\end{itemize}
-\end{block}
 
 \begin{block}{Lustre File System (\alert{Klemming})}
 \begin{itemize}
  \item Open-source massively parallel distributed file system
- \item Very high performance ($5$~PB storage - $130$~GB/s bandwidth)
- \item NO backup (always move data when done), 25 GB personal quota
- \item Home directory \\  \url{/cfs/klemming/nobackup/[initial]/[username]}
+ \item Optimized for handling data from many clients
+ \item Total size is $12$ PB (12,000 TB)
+ \item Home directory (25 GB, with backup)\\  {/cfs/klemming/home/[u]/[username]}
+ \item Project directory \\  {/cfs/klemming/projects/snic/[projectname]}
+ \item Scratch directory \\  {/cfs/klemming/scratch/[u]/[username]}
 \end{itemize}
 \end{block}
+
+\footnotesize
+\href{https://www.pdc.kth.se/support/documents/data\_management/klemming.html}{https://www.pdc.kth.se/support/documents/data\_management/klemming.html}
+
 }
+
+\frame{
+\frametitle{File Systems}
+
+\begin{itemize}
+\item Good practice
+    \begin{itemize}
+    \item Minimize the number of I/O operations
+    \item Avoid creating too many files
+    \item Avoid creating directories with a large numbers of files
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Bad practice
+    \begin{itemize}
+    \item Small reads
+    \item Opening many files
+    \item Seeking within a file to read a small piece of data
+    \end{itemize}
+\end{itemize}
+
+}
+
+
+\begin{frame}[fragile]
+\frametitle{Access Control Lists}
+
+\begin{exampleblock}{To view the access for a folder:}
+\footnotesize
+\begin{verbatim}
+getfacl -a /cfs/klemming/home/u/user/test
+\end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{The output looks like this:}
+\footnotesize
+\begin{verbatim}
+# file: /cfs/klemming/home/u/user/test
+# owner: me
+# group: users
+user::rwx
+group::r-x
+other::---
+\end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{To grant the access to another user:}
+\footnotesize
+\begin{verbatim}
+setfacl -m u:<uid>:r-x -R /cfs/klemming/home/u/user/test
+\end{verbatim}
+\end{exampleblock}
+
+\begin{exampleblock}{To remove the access for another user:}
+\footnotesize
+\begin{verbatim}
+setfacl -x u:<uid> -R /cfs/klemming/home/u/user/test
+\end{verbatim}
+\end{exampleblock}
+
+\end{frame}
+
+
 
 \frame<presentation:0>[noframenumbering]{
 \frametitle{File System Access}
